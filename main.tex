@@ -1,10 +1,12 @@
 % Copyright (c) 2019 FLAG lab
 
-\documentclass[american, print]{misis}
+\documentclass[american, natbib, print]{misis}
+
+\RequirePackage[final]{graphix}
+
+\input{preamble}
 
 \everymath{\displaystyle}
-
-
 
 \begin{document}
 
@@ -27,13 +29,8 @@
 \include{content/results}
 \include{content/conclusion}
 
-
 \backmatter
+\bibliographystyle{plainnat}  % Add this line
 \bibliography{bib/local,bib/writing}
 
-
-
 \end{document}
-
-\endinput
-
