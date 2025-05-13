@@ -427,6 +427,8 @@
 
 \newcommand{\scode}[1]{\textrm{\texttt{#1}}}
 \def\sdcode{\lstinline[style=scala]}
+
+
  
 
 %    ****************************************
@@ -647,7 +649,12 @@
 \newcommand{\ie}{\emph{i.e.,}\xspace}
 \newcommand{\cf}{\emph{cf.}\xspace}
 \newcommand{\uniandes}{Universidad de los Andes\xspace}
+\newcommand{\sculpt}{SCuLPT\xspace}
 
+
+% add pseudocode support
+\usepackage{algpseudocode}
+\usepackage{algorithm}
 
 \pagenumbering{arabic}  
 
