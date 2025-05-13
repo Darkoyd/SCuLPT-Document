@@ -12,30 +12,27 @@
 \KOMAoptions{open=left}
 \thispagestyle{empty}
 
-\include{title}
-\include{abstract}
-\include{acknowledgements}
+\include{content/title}
+\include{content/abstract}
+\include{content/acknowledgements}
 \tableofcontents
 \listoffigures
 \KOMAoptions{open=right}
 
 \mainmatter
 \input{chapter-titlepage}
-\include{introduction}
-%\include{CHAPTER_FILE_NAME}
+\include{content/introduction}
+\include{content/objetives}
+\include{content/methodology}
+\include{content/results}
+\include{content/conclusion}
 
-
-%Adding appendices if needed
-\appendix
-\include{appendix-a}
 
 \backmatter
 \bibliography{bib/local,bib/writing}
 
-\printindex
-\addcontentsline{toc}{chapter}{List of Terms}
-\printindex[symbols]
-\include{acronym}
+
+
 \end{document}
 
 \endinput
