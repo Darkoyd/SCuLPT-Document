@@ -17,10 +17,7 @@
 \usepackage{algpseudocode}
 \usepackage{xspace}
 \usepackage[final]{listings}
-\usepackage{acronym}
-\usepackage{url}
 %\usepackage[square,sort,comma,numbers]{natbib}
-\usepackage{etoolbox}
 \patchcmd{\thebibliography}{\chapter*}{\section*}{}{}
 
 \usepackage{etoolbox}
@@ -50,9 +47,7 @@
 %
 %
 %----[ Biber ]----
-\addbibresource[datatype=bibtex]{local.bib}
-\addbibresource[datatype=bibtex]{bib/general.bib}
-\addbibresource[datatype=bibtex]{bib/compsci.bib}
+\addbibresource[datatype=bibtex]{bib/local.bib}
 %\addbibresource[datatype=bibtex]{bib/learning.bib}
 %\nocite{*}
 %
@@ -138,44 +133,7 @@
 %% Listings
 \def\fref{\Fref} % treat all \frefs as \Frefs
 \renewcommand{\lstlistingname}{Algorithm}
-\newcommand*{\fancyreflstlabelprefix}{lst}
-\newcommand*{\Freflstname}{\lstlistingname}
-\newcommand*{\freflstname}{\MakeLowercase{\lstlistingname}}
-\Frefformat{plain}{\fancyreflstlabelprefix}%
-  {\Freflstname\fancyrefdefaultspacing#1}
-\frefformat{plain}{\fancyreflstlabelprefix}%
-  {\freflstname\fancyrefdefaultspacing#1}
-\Frefformat{vario}{\fancyreflstlabelprefix}%
-  {\Freflstname\fancyrefdefaultspacing#1#3}
-\frefformat{vario}{\fancyreflstlabelprefix}%
-  {\freflstname\fancyrefdefaultspacing#1#3}
-
-  
-% ln delimiter
-\newcommand*{\fancyreflnlabelprefix}{ln}
-\newcommand*{\Freflnname}{Line}
-\newcommand*{\freflnname}{\MakeLowercase{\Freflnname}}
-\Frefformat{vario}{\fancyreflnlabelprefix}%
-  {\Freflnname\fancyrefdefaultspacing#1#3}
-\frefformat{vario}{\fancyreflnlabelprefix}%
-  {\freflnname\fancyrefdefaultspacing#1#3}
-\Frefformat{plain}{\fancyreflnlabelprefix}%
-  {\Freflnname\fancyrefdefaultspacing#1}
-\frefformat{plain}{\fancyreflnlabelprefix}%
-  {\freflnname\fancyrefdefaultspacing#1}    
-
-%def delimiter
-\newcommand*{\fancyrefdeflabelprefix}{def}
-\newcommand*{\Frefdefname}{Definition}
-\newcommand*{\frefdefname}{\MakeLowercase{\Frefdefname}}
-\Frefformat{vario}{\fancyrefdeflabelprefix}%
-  {\Frefdefname\fancyrefdefaultspacing#1#3}
-\frefformat{vario}{\fancyrefdeflabelprefix}%
-  {\frefdefname\fancyrefdefaultspacing#1#3}
-\Frefformat{plain}{\fancyrefdeflabelprefix}%
-  {\Frefdefname\fancyrefdefaultspacing#1}
-\frefformat{plain}{\fancyrefdeflabelprefix}%
-  {\frefdefname\fancyrefdefaultspacing#1}    
+   
   
 %theorem delimiter
 \newcommand*{\fancyreftheolabelprefix}{theo}
@@ -258,9 +216,6 @@
  {\lstset{style=Athena,#1}}{}  
 
  
-% athena in line source-code
-\newcommand{\scode}[1]{\textrm{\texttt{#1}}}
-\def\scode{\lstinline[style=Athena, basicstyle=\small\ttfamily,]}
 
 %----[ Figures ]---
 %\addtolength{\intextsep}{-1mm}
@@ -289,9 +244,6 @@
 
 %----[ Commands ]---
 %Latins
-\newcommand{\eg}{\emph{e.g.,}\xspace}
-\newcommand{\ie}{\emph{i.e.,}\xspace}
-\newcommand{\cf}{\emph{cf.}\xspace}
 
 \newcommand{\artlang}{SCuLPT\xspace}
 
@@ -304,12 +256,6 @@
 \definecolor{missing}{rgb}{.9, .1, .0}
 
 
-\newcommand{\authorcomment}[3][comment]
-  {\ifdraft{\noindent
-      \fbox{\footnotesize\textcolor{author}{\textsc{#2}}}
-      \textcolor{#1}{\textsl{#3}}}{}}
-
-\input{acronyms}
 
 %Space squeezing
 \let\orig@figure\figure

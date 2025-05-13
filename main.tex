@@ -1,8 +1,8 @@
 % Copyright (c) 2019 FLAG lab
 
-\documentclass[american, natbib, print]{misis}
+\documentclass[american, print]{misis}
 
-\RequirePackage[final]{graphix}
+\RequirePackage[final]{graphicx}
 
 \input{preamble}
 
@@ -30,7 +30,6 @@
 \include{content/conclusion}
 
 \backmatter
-\bibliographystyle{plainnat}  % Add this line
-\bibliography{bib/local,bib/writing}
+\printbibliography[title=Bibliography]
 
 \end{document}
