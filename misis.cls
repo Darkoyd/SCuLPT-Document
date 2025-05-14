@@ -650,6 +650,7 @@
 \newcommand{\cf}{\emph{cf.}\xspace}
 \newcommand{\uniandes}{Universidad de los Andes\xspace}
 \newcommand{\sculpt}{SCuLPT\xspace}
+\newcommand{\sculpter}{SCuLPTER\xspace}
 
 
 % add pseudocode support
