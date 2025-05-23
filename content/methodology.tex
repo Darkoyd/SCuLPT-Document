@@ -6,36 +6,47 @@ For the development of \sculpt, we have followed a user-centered design approach
 \sculpt is focused on usability and accessibility is displayed by using simple but distinctive shapes and forms for each component on the language.
 This first design choice allows for users to easily identify and differentiate between different components of the language, making it trivial to convey meaning behind each shape while allowing people with any background to recognize each component foregoing knowledge, language or capacity barriers that arise from conventional programming languages.
 
-Regarding the programming language, \sculpt is designed to be a Turing complete language.
-By building structures and following the intuitive rules of the language, users can create any program they desire.
+Regarding the programming language, \sculpt is designed to be a Turing complete language with a very small instruction set.
+By building structures and following the intuitive rules of the physical language, users can create any program they desire.
 The language is designed to be simple and easy to understand, with a focus on the visual representation of the program rather than the code itself.
-Code block are physically assembled together to create a program, with each block representing a different function or operation. Block are designed such that their connections are intuitive and easy to understand, with each block having a set of features that must be connected to other blocks in order to function correctly.
+Code block are physically assembled together to create a program, with each block representing a different operation. Block are designed such that their connections are intuitive and easy to understand, with each block having a set of features that must be connected to other blocks in order to function correctly.
 This allows users to create programs without the need to understand complex syntax or semantics, making it accessible to users with little to no programming experience.
 
 
-Regarding the language's aesthetics, \sculpt is designed to be an artistic sandbox therefore the rules and specification for how shapes should look and feel are very loose. This allows users to tinker with the components, suiting them for their needs and desires.
-The only rules that must be followed only consider are component connections and a set of features each block requires. Final shape, size, material, color or texture are completely open for anyone to modify without any impact on the program.
+Regarding the language's aesthetics, \sculpt is designed to be an artistic sandbox. The rules and specification for how shapes should look and feel are very loose. This allows users to tinker with the components, suiting them for their needs and desires.
+The only rules that must be followed only consider component connections and a set of features each block requires. Final shape, size, material, color or texture are completely open for anyone to modify without any impact on the program.
 This provides a sense of freedom and creativity that is not present in other programming languages, allowing users to express themselves through their code and create unique and personal pieces of art.
-This also implies that the language can be fitted to almost anyone's needs, allowing accessibility and customization for users with different physical or cognitive capacities.
+This also implies that the language can be fitted to almost anyone's needs, allowing accessibility and customization for users with different physical or cognitive capacities or context where \sculpt will be used.
 
 \sculpt current implementation features small 3D printed components with varying colors.
 The printed pieces follow the standard \sculpt implementation with no modifications to the shapes.
 The components are connected using magnets and screw elbow joints, allowing for easy assembly and disassembly of the components, making it easy to create and modify programs on the fly.
 
-\sculpt has a double-edge sword, as it is strictly physical media, runtime is tied to the interpreter, a human interpreter.
-Human interpretation is one of the main aspects of the language, yet humans are not perfect. Errors in the program's execution are bound to happen, and the language is not designed to be fault tolerant from a strict computation standpoint.
+\sculpt has a double-edge sword, as it is strictly physical media, execution is tied to the interpreter, a human interpreter.
+Human interpretation is one of the main aspects of the language, yet humans are not perfect machines. Errors in the program's execution are bound to happen at some point and the language is not designed to be fault tolerant from a strict computation standpoint.
 To overcome this, \sculpt also features the Simple Cubic Language for Programming Task's Environment and Runtime, \sculpter for short.
-Written in Scala, \sculpter is a transpiler capable of taking a \sculpt program and and running it step by step to allow for debugging and testing of the program before it is physically assembled.
-\sculpter is designed to be lightweight and portable, allowing it to run in any browser. This makes easily distributable and accessible to users wanting to have a reliable method of interpreting their sculptures.
+Written in Scala, \sculpter is a transpiler written in Scala capable of taking a \sculpt program and and running it step by step to allow for debugging and testing of the program before it is physically assembled.
+\sculpter is designed to be lightweight and portable, allowing it to run in any browser thanks to the Scala.js web framework. This makes easily distributable and accessible to users wanting to have a reliable method of interpreting their sculptures.
 
+\subsection{Validation}
+\label{sec:methodology:validation}
 
-Regarding validation, we have performed a series of tests with users from different backgrounds and levels of experience with programming.
-For our tests, users ranged from novices with no prior programming experience to expert programmers with years of experience in the field.
+Regarding validation, we have performed a series of sessions with users from different backgrounds and levels of experience with programming.
+For our sessions, users ranged from novices with no prior programming experience to expert programmers with years of experience in the field.
 Users also varied in ages, ranging from secondary school students to graduate students and professionals.
 Tests were also performed with users with little to no knowledge in programming, but rather in art related fields.
 The tests were designed to evaluate the usability and accessibility of \sculpt, as well as the overall experience of using the language.
-The tests were performed in a controlled environment, with users being given a set of tasks to complete using \sculpt.
+
+This sessions consisted of several moments, starting with a brief introduction to the language and its components.
+This introduction was tailored to each group of users, with novices receiving a more in-depth explanation of the language and its components, while expert programmers received a more technical overview of the language and its features.
+Afterwards, users were given the opportunity to explore the language and its components, with a focus on the physicality of the blocks and their connections. Growing familiarity with the language and its components was the main goal of this section, allowing users to explore the language and its components without any pressure to complete any tasks.
+Next, users were given a set of tasks to complete using \sculpt, with the goal of evaluating the usability and accessibility of the language.
+Several sets of tasks were created varying in complexity and difficulty to accommodate the different levels of experience of the users.
 This tasks consisted of simple programs that could be created using the language, such as creating a simple loop to add numbers or conditional statements break from such loops.
+The tests were performed in a controlled environment, with users being given a set of tasks to complete using \sculpt.
+During this test phase, users were allowed to ask questions and receive help from the facilitators, but were encouraged to complete the tasks on their own.
+User were also encouraged to explore the language and its components, with the goal of creating a program that was both functional and visually interesting.
+Finally, users were given a survey to evaluate their experience with \sculpt, with a focus on the usability, accessibility of the language, and their overall programming knowledge.
 
 Evaluation of the results was done using a combination of qualitative and quantitative methods.
 Qualitative methods included user interviews and surveys, while quantitative methods included measuring the time taken to complete each task and the number of errors made during the process.
