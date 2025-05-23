@@ -51,6 +51,7 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
 
 \begin{algorithm}
     \caption{Fibonacci sequence in \sculpt}
+    \label{alg:fib}
     \begin{algorithmic}
     \State $push~0$ \textbf{star}
     \State $push~0$ \textbf{circle}
@@ -76,18 +77,114 @@ Writing a Fibonacci program is a simple task in \sculpt, yet it is not a complet
 The language is Turing complete, and it is capable of writing any program that can be written in any other programming language.
 To validate this, we will simulate Turing machine in \sculpt.
 The Turing machine is a theoretical model of computation that can simulate any algorithm.
-For this instance, an implementation od a 3-State Busy Beaver Turing machine will be used.
+For this instance, an implementation of a 3-State Busy Beaver Turing machine will be used.
 The Busy Beaver is a theoretical Turing machine that is designed to run for the longest possible time before halting.
-Its \sculpt implementation is shown in Figure \ref{fig:busybeaver}.
+%Its \sculpt implementation is shown in Figure \ref{fig:busybeaver}.
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{figures/ArtlangBusyBeaver.png}
-    \caption{3-State Busy Beaver Turing machine in \sculpt}
-    \label{fig:busybeaver}
-    \vspace{5pt}
-\end{figure}
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.5\textwidth]{figures/ArtlangBusyBeaver.png}
+%     \caption{3-State Busy Beaver Turing machine in \sculpt}
+%     \label{fig:busybeaver}
+%     \vspace{5pt}
+% \end{figure}
 
 Its \sculpter implementation is as follows:
 
-\verbatim{Code still to be added, currently in progress}
+\begin{algorithm}
+    \caption{3-State Busy Beaver Turing machine in \sculpt}
+    \label{alg:busybeaver}
+    \begin{algorithmic}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State $push~0$ \textbf{left}
+    \State
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State $push~0$ \textbf{right}
+    \State
+    \State $push~0$ \textbf{head}
+    \State
+    \State \textbf{// STATE A}
+    \State $push~1$ \textbf{temp}
+    \State $mov$ \textbf{temp} \textbf{head}
+    \State $cmp$ \textbf{temp}
+    \State $?$ \textbf{temp}
+    \State $jmp~13$ \textbf{// A\_1}
+    \State $push~1$ \textbf{head}
+    \State $mov$ \textbf{right} \textbf{head}
+    \State $mov$ \textbf{head} \textbf{left}
+    \State
+    \State \textbf{// STATE B}
+    \State $push~1$ \textbf{temp}
+    \State $mov$ \textbf{temp} \textbf{head}
+    \State $cmp$ \textbf{temp}
+    \State $?$ \textbf{temp}
+    \State $jmp~9$
+    \State $push~1$ \textbf{head}
+    \State $mov$ \textbf{left} \textbf{head}
+    \State $mov$ \textbf{head} \textbf{right}
+    \State $jmp~-16$
+    \State
+    \State \textbf{// A\_1}
+    \State $push~1$ \textbf{head}
+    \State $mov$ \textbf{left} \textbf{head}
+    \State $mov$ \textbf{head} \textbf{right}
+    \State $jmp~5$
+    \State
+    \State \textbf{// B\_1}
+    \State $push~1$ \textbf{head}
+    \State $mov$ \textbf{right} \textbf{head}
+    \State $mov$ \textbf{head} \textbf{left}
+    \State $jmp~-16$
+    \State
+    \State \textbf{// STATE\_C}
+    \State $push~1$ \textbf{temp}
+    \State $mov$ \textbf{temp} \textbf{head}
+    \State $cmp$ \textbf{temp}
+    \State $?$ \textbf{temp}
+    \State $jmp~5$
+    \State $push~1$ \textbf{head}
+    \State $mov$ \textbf{left} \textbf{head}
+    \State $mov$ \textbf{head} \textbf{right}
+    \State $jmp~-25$
+    \State
+    \State \textbf{// HALT}
+    \State $push~1$ \textbf{head}
+    \end{algorithmic}
+\end{algorithm}
+
+This simulation of the Busy Beaver Turing machine is a simple program that runs for some time before halting.
+Since this simulation is of a Turing machine, it is capable of simulating any algorithm, thus proving that \sculpt is Turing complete.
+
+\subsection{Validation}
+\label{sec:results:validation}
+\sculpt is a programming language that is designed to be used by artists and programmers alike.
+The language is designed to be easy to use and understand, yet powerful enough to create complex programs.
+To validate \sculpt, we have conducted a series of sessions with different users to test the language and its ecosystem.
+
+\subsubsection{Regarding Aesthetics}
+\label{sec:results:validation:aesthetics}
+Special sessions were held with a group of artists to test their overall experience with \sculpt from their experience as artists.
+Results were surprisingly positive, with most users reporting that they enjoyed the experience of using \sculpt.
+Participants expressed their appreciation for the physicality of the blocks and the ability to manipulate them in a tangible way.
+The physicality of the block was quintessential to their experience.
+Participants also reported that the blocks were easy to understand and use, and that they enjoyed the process of building their sculptures.
+When presented with the programming tasks, participants were able to understand the assignments, understand the block and their functionalities, but they were not able to complete any task.
+Nevertheless, they expressed overall satisfaction while trying and failing to complete the tasks.
+Participants reported that the experience of using \sculpt was enjoyable and that they would like to use it again in the future.
+This last point lead to additional sessions with the same group of artists, as they were engaged with \sculpt and wanted to explore it further.
+While trying and failing to complete the tasks, they used the blocks to create sculptures that were not intended to be functional, but rather artistic.
+Participants reported that they enjoyed the process of creating sculptures and that they found it to be a rewarding experience.
+Surprisingly, participants used the blocks in ways that were not intended from the start. Creating visually interesting constructs with this newfound freedom.
+
+
+\subsubsection{Regarding Computation}
