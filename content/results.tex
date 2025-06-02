@@ -3,19 +3,19 @@
 \section{Results}
 \label{sec:results}
 
-\subsection{Language}
+\subsection{Language Implementation}
 \label{sec:results:language}
 
 \sculpt as a programming language is a functioning language capable of writing any program.
-
-As a first example and introduction to the language itself, we have implemented a simple program that calculates the Fibonacci sequence in \sculpt.
 
 The language uses FILO (First In Last Out) stacks as its only data structure to store and manipulate data. Each stack is represented by a different shape other than the reserved shapes used by the instructions, and they are initialized on first call.
 Stacks can hold an arbitrarily large amount of rational numbers.
 Stacks allow the pop, push, move and duplicate operations.
 Numbers are defined by their literal counterparts, and the language supports basic arithmetic.
+Regarding their representation, stacks are represented by any shape that is not reserved for the instructions,, such as simple shapes like circles, triangles or squares or complex drawings. Anything goes.
+
 Arithmetic operations are the only operations available in \sculpt.
-Availabre operations are addition, subtraction, multiplication, comparison, modulo and division.
+Available operations are addition, subtraction, multiplication, comparison, modulo and division.
 These are performed in two ways:
 
 \begin{itemize}
@@ -23,16 +23,20 @@ These are performed in two ways:
     \item \textbf{As binary operator}: The first element of the stack given by parameter is popped and the second parameter, a number, are operated with the result of the first operation. The result is pushed back into the stack.
 \end{itemize}
 
+In cases where the arithmetic is not defined, such as division by zero or modulo by zero, a \textit{nil} value is pushed into the stack.
+When a \textit{nil} value is encountered on arithmetic operations, other than comparisons, the program will halt in an error state.
+
 \sculpt allows for flow control through the use of loops, conditional blocks and jump blocks.
-Loops are physically represented by a literal loop of connected blocks or a single block jump.
-The jump block is a special block that allows for the execution to continue at any point by moving the execution pointer from the current block to another with the offset given by parameter.
+Loops are physically represented by a literal loop of connected blocks or a single block jump with a negative number as a parameter.
+The jump block is a special block that allows for the execution to continue at any point by moving the execution from the current block to another with the offset given by parameter.
 Conditional statements are represented by a question block using a stack value as a parameter. Positive values are considered true and evaluate the following block, and negative values are considered false and do not evaluate the affected block, but rather skips the next instruction.
 
 
 \sculpt is based on the physical blocks. Blocks as three-dimensional objects are unwieldy to be described in text.
 Therefore, we have made several valid notations for \sculpt programs.
-Every block is represented as a square with the shape of each block inside the square. 
+Every block is represented as a square with the shape of each block inside the square.
 The connections between blocks are represented by arrows between the squares.
+As a first example and introduction to the language itself, we have implemented a simple program that calculates the Fibonacci sequence in \sculpt.
 
 \begin{figure}
     \centering
@@ -42,9 +46,9 @@ The connections between blocks are represented by arrows between the squares.
     \vspace{5pt}
 \end{figure}
 
-The program in Figure \ref{fig:artlangfib} fills the cirle stack with the numbers of the Fibonacci sequence.
+The program in Figure \ref{fig:artlangfib} fills the circle stack with the numbers of the Fibonacci sequence.
 
-The second notation is a more traditional notation, which is used by the \sculpter interpreter, which will be explained afterwards.
+The second notation is a more traditional representation of code, which is used by the \sculpter interpreter, which will be explained afterwards.
 The program is written in a more traditional way, every block has a reserved name, connections are omitted. It reads as a list of instructions, somewhat similar to an assembly language.
 Limitations of this implementation are that the program is not visually represented, connections between blocks are not shown and physical loops cannot be represented, forcing the user to only use jump operations for execution control.
 Our Fibonacci implementation can be rewritten in \sculpter as follows.
@@ -76,18 +80,7 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
 Writing a Fibonacci program is a simple task in \sculpt, yet it is not a complete proof of the language's capabilities.
 The language is Turing complete, and it is capable of writing any program that can be written in any other programming language.
 To validate this, we will simulate Turing machine in \sculpt.
-The Turing machine is a theoretical model of computation that can simulate any algorithm.
 For this instance, an implementation of a 3-State Busy Beaver Turing machine will be used.
-The Busy Beaver is a theoretical Turing machine that is designed to run for the longest possible time before halting.
-%Its \sculpt implementation is shown in Figure \ref{fig:busybeaver}.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.5\textwidth]{figures/ArtlangBusyBeaver.png}
-%     \caption{3-State Busy Beaver Turing machine in \sculpt}
-%     \label{fig:busybeaver}
-%     \vspace{5pt}
-% \end{figure}
 
 Its \sculpter implementation is as follows:
 
@@ -165,11 +158,27 @@ Its \sculpter implementation is as follows:
 This simulation of the Busy Beaver Turing machine is a simple program that runs for some time before halting.
 Since this simulation is of a Turing machine, it is capable of simulating any algorithm, thus proving that \sculpt is Turing complete.
 
+The complete implementation of \sculpt is open source and is available on GitHub\footnote{\url{https://github.com/Darkoyd/SCuLPT}}.
+
 \subsection{Validation}
 \label{sec:results:validation}
 \sculpt is a programming language that is designed to be used by artists and programmers alike.
 The language is designed to be easy to use and understand, yet powerful enough to create complex programs.
 To validate \sculpt, we have conducted a series of sessions with different users to test the language and its ecosystem.
+A total of 6 sessions were conducted with a total of 75 users, ranging from novices with no prior programming experience to expert programmers with years of experience in the field.
+The sessions were designed to evaluate the usability and accessibility of \sculpt, as well as the overall experience of using the language.
+
+\subsubsection{Regarding Usability}
+\label{sec:results:validation:usability}
+\sculpt was designed to be easy to use and understand, with a focus on the visual representation of the program rather than the code itself.
+Usability was evaluated through questions in the survey given to users after the sessions, as well as through user interviews.
+The results of the usability questionnaire showed that users found \sculpt to be easy to use and understand, with a majority of users reporting that they were able to use and understand the shapes and blocks of the language with relative ease.
+
+
+
+\subsubsection{Regarding Computation}
+\label{sec:results:validation:computation}
+
 
 \subsubsection{Regarding Aesthetics}
 \label{sec:results:validation:aesthetics}
@@ -186,5 +195,3 @@ While trying and failing to complete the tasks, they used the blocks to create s
 Participants reported that they enjoyed the process of creating sculptures and that they found it to be a rewarding experience.
 Surprisingly, participants used the blocks in ways that were not intended from the start. Creating visually interesting constructs with this newfound freedom.
 
-
-\subsubsection{Regarding Computation}
