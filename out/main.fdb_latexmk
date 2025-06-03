@@ -1,9 +1,0 @@
-# Fdb version 4
-["pdflatex"] 0 "d:/Documents/Git/SCuLPT-Document/main.tex" "out/main.pdf" "main" 0 -1
-  "d:/Documents/Git/SCuLPT-Document/main.tex" 0 -1 0 ""
-  "out/main.aux" 0 -1 0 "pdflatex"
-  (generated)
-  "out/main.aux"
-  "out/main.log"
-  "out/main.pdf"
-  (rewritten before read)
