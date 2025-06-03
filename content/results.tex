@@ -77,7 +77,7 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
     \end{algorithm}
 \endinput
 
-Writing a Fibonacci program is a simple task in \sculpt, yet it is not a complete proof of the language's capabilities.
+Writing a Fibonacci program is a simple task in \sculpt which gives us a good insight on how \sculpt looks and feels, yet it is not a complete proof of the language's capabilities.
 The language is Turing complete, and it is capable of writing any program that can be written in any other programming language.
 To validate this, we will simulate Turing machine in \sculpt.
 For this instance, an implementation of a 3-State Busy Beaver Turing machine will be used.
@@ -160,34 +160,64 @@ Since this simulation is of a Turing machine, it is capable of simulating any al
 
 The complete implementation of \sculpt is open source and is available on GitHub\footnote{\url{https://github.com/Darkoyd/SCuLPT}}.
 
+\subsection{Interpreter Implementation}
+\label{sec:results:interpreter}
+\sculpter is an interpreter for \sculpt built in Scala that allows users to write and execute \sculpt programs in a more traditional way.
+It leverages the Scala.js framework to provide a web-based interface for users.
+This makes the interpreter lightweight, distributable and easy to use without the need for any additional software.
+\sculpter features a simple text editor where a program can be written. It also features buttons to lex, parse and execute the program.
+Execution of the program is done in a step-by-step manner, allowing users to see the state of the program at each step.
+\sculpter code is open source and is also available on GitHub\footnote{\url{https://github.com/Darkoyd/SCuLPTER}}.
+
+
 \subsection{Validation}
 \label{sec:results:validation}
-\sculpt is a programming language that is designed to be used by artists and programmers alike.
-The language is designed to be easy to use and understand, yet powerful enough to create complex programs.
 To validate \sculpt, we have conducted a series of sessions with different users to test the language and its ecosystem.
 A total of 6 sessions were conducted with a total of 75 users, ranging from novices with no prior programming experience to expert programmers with years of experience in the field.
-The sessions were designed to evaluate the usability and accessibility of \sculpt, as well as the overall experience of using the language.
+The sessions were designed to evaluate the usability and accessibility of \sculpt, as well as the overall user experience of using the language.
 
 \subsubsection{Regarding Usability}
 \label{sec:results:validation:usability}
-\sculpt was designed to be easy to use and understand, with a focus on the visual representation of the program rather than the code itself.
 Usability was evaluated through questions in the survey given to users after the sessions, as well as through user interviews.
-The results of the usability questionnaire showed that users found \sculpt to be easy to use and understand, with a majority of users reporting that they were able to use and understand the shapes and blocks of the language with relative ease.
+The results of the usability questionnaire showed that users found \sculpt, from a physical standpoint, to be easy to use and understand, 
+with a majority of users reporting that they were able to use and understand the shapes and blocks of the language with relative ease.
+Among the users, especially the younger demographics, the physicality of the blocks was a key factor in their understanding of the language.
 
+One concern that was raised by the researchers was that of overall piece integrity and the possibility of losing pieces.
+Continuous use of the blocks in a classroom setting could lead to pieces being lost or damaged, which could hinder the usability of the language.
+PLA is a material notorious for being a somewhat soft plastic prone to deformation and damage, especially with repeated use.
+As expected, some pieces were lost during the sessions, but the overall integrity of the blocks was maintained.
+The blocks were able to withstand the repeated use and manipulation by the users. The remaining pieces were still usable and intact, and the users were able to continue using the language without any issues.
 
+These results shows that \sculpt as a building block construct and visual language performs as expected, with users sharing overall positive feedback regarding the usability of the language.
 
 \subsubsection{Regarding Computation}
 \label{sec:results:validation:computation}
 
+Another section of the survey was dedicated to evaluate, from a more technical eye, the ease of ude of \sculpt as a programming language.
+Alongside the survey, users were given a set of programming tasks to complete using \sculpt.
+The tasks were designed to test the users' understanding of the language and its capabilities, as well as their ability to write programs in \sculpt.
+Throughout the sessions, about 50\% of the total participants were able to complete the tasks.
+Further, per-session analysis shows interesting insights into the users' understanding of the language.
+The first session was conducted with a group of novice teenage users, who had no prior programming experience.
+These users were able to understand the basic concepts of \sculpt yet they were not able to complete the tasks.
+The second session was conducted with a group of undergraduate students and expert programmers, who had years of experience in the field.
+Surprisingly, these users were also not able to complete the tasks, but they were able to understand the language and its capabilities.
+The next sessions were conducted with groups ranging from children to teenagers. Children evidently struggled with programming, yet outshined in the physical manipulation of the blocks.
+Teenagers, on the other hand, were able to understand the language and its capabilities, and they were able to complete the tasks in an average time of 1 hour and a half.
+
+Results show that \sculpt as a programming language can be easy to understand and use, yet it is not easy to write programs in \sculpt.
+The language is capable of writing any program, but it requires a certain level of understanding of the language and its capabilities.
+This is a common issue with programming languages that \sculpt tried to eliminate, but it is still present.
 
 \subsubsection{Regarding Aesthetics}
 \label{sec:results:validation:aesthetics}
 Special sessions were held with a group of artists to test their overall experience with \sculpt from their experience as artists.
-Results were surprisingly positive, with most users reporting that they enjoyed the experience of using \sculpt.
+Results were surprisingly positive, with most users reporting that they enjoyed very much the experience of using \sculpt.
 Participants expressed their appreciation for the physicality of the blocks and the ability to manipulate them in a tangible way.
-The physicality of the block was quintessential to their experience.
+The physicality of the block "was quintessential to their experience".
 Participants also reported that the blocks were easy to understand and use, and that they enjoyed the process of building their sculptures.
-When presented with the programming tasks, participants were able to understand the assignments, understand the block and their functionalities, but they were not able to complete any task.
+When presented with the programming tasks, participants were able to easily understand the assignments, understand the block and their functionalities, but they were not able to complete any task.
 Nevertheless, they expressed overall satisfaction while trying and failing to complete the tasks.
 Participants reported that the experience of using \sculpt was enjoyable and that they would like to use it again in the future.
 This last point lead to additional sessions with the same group of artists, as they were engaged with \sculpt and wanted to explore it further.
@@ -195,3 +225,5 @@ While trying and failing to complete the tasks, they used the blocks to create s
 Participants reported that they enjoyed the process of creating sculptures and that they found it to be a rewarding experience.
 Surprisingly, participants used the blocks in ways that were not intended from the start. Creating visually interesting constructs with this newfound freedom.
 
+These results paint \sculpt as a visually interesting, and even fun, medium for creative expression.
+Although this document has been focused on \sculpt from a technical standpoint, it is important to note that \sculpt was not only made to be a programming language, but also a medium for creative expression.
