@@ -38,7 +38,7 @@ Every block is represented as a square with the shape of each block inside the s
 The connections between blocks are represented by arrows between the squares.
 As a first example and introduction to the language itself, we have implemented a simple program that calculates the Fibonacci sequence in \sculpt.
 
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ArtlangFibpng}
     \caption{\sculpt Fibonacci program}
@@ -56,105 +56,101 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
 \begin{algorithm}
     \caption{Fibonacci sequence in \sculpt}
     \label{alg:fib}
+    \small
     \begin{algorithmic}
     \State $push~0$ \textbf{star}
     \State $push~0$ \textbf{circle}
     \State $push~1$ \textbf{circle}
     \State $push~1$ \textbf{triangle}
-    \While{True}
-        \State $dup$ \textbf{triangle}
-        \State $dup$ \textbf{star}
-        \State $mov$ \textbf{star} \textbf{trapezoid}
-        \State $mov$ \textbf{triangle} \textbf{trapezoid}
-        \State $add$ \textbf{trapezoid}
-        \State $pop$ \textbf{star}
-        \State $mov$ \textbf{triangle} \textbf{star}
-        \State $dup$ \textbf{trapezoid}
-        \State $mov$ \textbf{trapezoid} \textbf{circle}
-        \State $mov$ \textbf{trapezoid} \textbf{triangle}
-    \EndWhile
+    \State $dup$ \textbf{triangle}
+    \State $dup$ \textbf{star}
+    \State $mov$ \textbf{star} \textbf{trapezoid}
+    \State $mov$ \textbf{triangle} \textbf{trapezoid}
+    \State $add$ \textbf{trapezoid}
+    \State $pop$ \textbf{star}
+    \State $mov$ \textbf{triangle} \textbf{star}
+    \State $dup$ \textbf{trapezoid}
+    \State $mov$ \textbf{trapezoid} \textbf{circle}
+    \State $mov$ \textbf{trapezoid} \textbf{triangle}
+    \State $jmp$ \textbf{-10}
     \end{algorithmic}
     \end{algorithm}
-\endinput
+
 
 Writing a Fibonacci program is a simple task in \sculpt which gives us a good insight on how \sculpt looks and feels, yet it is not a complete proof of the language's capabilities.
-The language is Turing complete, and it is capable of writing any program that can be written in any other programming language.
-To validate this, we will simulate Turing machine in \sculpt.
+The language is Turing complete and it is capable of writing any program that can be written in any other programming language.
+To validate this, we will simulate a Turing machine in \sculpt.
 For this instance, an implementation of a 3-State Busy Beaver Turing machine will be used.
 
 Its \sculpter implementation is as follows:
 
-\begin{algorithm}
+\begin{algorithm}[H]
     \caption{3-State Busy Beaver Turing machine in \sculpt}
     \label{alg:busybeaver}
+    \small
     \begin{algorithmic}
     \State $push~0$ \textbf{left}
     \State $push~0$ \textbf{left}
     \State $push~0$ \textbf{left}
     \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State
     \State $push~0$ \textbf{right}
     \State $push~0$ \textbf{right}
     \State $push~0$ \textbf{right}
     \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State
     \State $push~0$ \textbf{head}
-    \State
     \State \textbf{// STATE A}
     \State $push~1$ \textbf{temp}
     \State $mov$ \textbf{temp} \textbf{head}
     \State $cmp$ \textbf{temp}
     \State $?$ \textbf{temp}
-    \State $jmp~13$ \textbf{// A\_1}
+    \State $jmp~13$ \textbf{// Go to A\_1}
     \State $push~1$ \textbf{head}
     \State $mov$ \textbf{right} \textbf{head}
     \State $mov$ \textbf{head} \textbf{left}
-    \State
     \State \textbf{// STATE B}
     \State $push~1$ \textbf{temp}
     \State $mov$ \textbf{temp} \textbf{head}
     \State $cmp$ \textbf{temp}
     \State $?$ \textbf{temp}
-    \State $jmp~9$
+    \State $jmp~9$ \textbf{// Go to B\_1}
     \State $push~1$ \textbf{head}
     \State $mov$ \textbf{left} \textbf{head}
     \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~-16$
-    \State
+    \State $jmp~-16$ 
     \State \textbf{// A\_1}
     \State $push~1$ \textbf{head}
     \State $mov$ \textbf{left} \textbf{head}
     \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~5$
-    \State
+    \State $jmp~5$ \textbf{// Go to C}
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+    \caption{3-State Busy Beaver Turing machine in \sculpt (continued)}
+    \label{alg:busybeaver}
+    \small
+    \begin{algorithmic}
     \State \textbf{// B\_1}
     \State $push~1$ \textbf{head}
     \State $mov$ \textbf{right} \textbf{head}
     \State $mov$ \textbf{head} \textbf{left}
-    \State $jmp~-16$
-    \State
+    \State $jmp~-16$ \textbf{// Go to B}
     \State \textbf{// STATE\_C}
     \State $push~1$ \textbf{temp}
     \State $mov$ \textbf{temp} \textbf{head}
     \State $cmp$ \textbf{temp}
     \State $?$ \textbf{temp}
-    \State $jmp~5$
+    \State $jmp~5$ \textbf{// Go to HALT}
     \State $push~1$ \textbf{head}
     \State $mov$ \textbf{left} \textbf{head}
     \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~-25$
-    \State
+    \State $jmp~-25$ \textbf{// Go to B}
     \State \textbf{// HALT}
     \State $push~1$ \textbf{head}
     \end{algorithmic}
 \end{algorithm}
 
+\normalsize
 This simulation of the Busy Beaver Turing machine is a simple program that runs for some time before halting.
 Since this simulation is of a Turing machine, it is capable of simulating any algorithm, thus proving that \sculpt is Turing complete.
 
@@ -194,7 +190,7 @@ These results shows that \sculpt as a building block construct and visual langua
 \subsubsection{Regarding Computation}
 \label{sec:results:validation:computation}
 
-Another section of the survey was dedicated to evaluate, from a more technical eye, the ease of ude of \sculpt as a programming language.
+Another section of the survey was dedicated to evaluate, from a more technical eye, the ease of use of \sculpt as a programming language.
 Alongside the survey, users were given a set of programming tasks to complete using \sculpt.
 The tasks were designed to test the users' understanding of the language and its capabilities, as well as their ability to write programs in \sculpt.
 Throughout the sessions, about 50\% of the total participants were able to complete the tasks.
@@ -203,7 +199,7 @@ The first session was conducted with a group of novice teenage users, who had no
 These users were able to understand the basic concepts of \sculpt yet they were not able to complete the tasks.
 The second session was conducted with a group of undergraduate students and expert programmers, who had years of experience in the field.
 Surprisingly, these users were also not able to complete the tasks, but they were able to understand the language and its capabilities.
-The next sessions were conducted with groups ranging from children to teenagers. Children evidently struggled with programming, yet outshined in the physical manipulation of the blocks.
+The next sessions were conducted with groups ranging from children to teenagers. Children evidently struggled with programming, yet outshines in the physical manipulation of the blocks.
 Teenagers, on the other hand, were able to understand the language and its capabilities, and they were able to complete the tasks in an average time of 1 hour and a half.
 
 Results show that \sculpt as a programming language can be easy to understand and use, yet it is not easy to write programs in \sculpt.
@@ -227,3 +223,4 @@ Surprisingly, participants used the blocks in ways that were not intended from t
 
 These results paint \sculpt as a visually interesting, and even fun, medium for creative expression.
 Although this document has been focused on \sculpt from a technical standpoint, it is important to note that \sculpt was not only made to be a programming language, but also a medium for creative expression.
+\endinput
