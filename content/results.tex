@@ -1,9 +1,9 @@
 % !TEX root = ./../paper.tex
 
-\section{Results}
-\label{sec:results}
+\chapter{Results}
+\label{cha:results}
 
-\subsection{Language Implementation}
+\section{Language Implementation}
 \label{sec:results:language}
 
 \sculpt as a programming language is a functioning language capable of writing any program.
@@ -14,17 +14,21 @@ Stacks allow the pop, push, move and duplicate operations.
 Numbers are defined by their literal counterparts, and the language supports basic arithmetic.
 Regarding their representation, stacks are represented by any shape that is not reserved for the instructions,, such as simple shapes like circles, triangles or squares or complex drawings. Anything goes.
 
-Arithmetic operations are the only operations available in \sculpt.
-Available operations are addition, subtraction, multiplication, comparison, modulo and division.
-These are performed in two ways:
+The six arithmetic operations---addition, subtraction, multiplication, division, modulo and comparison---are the only operations available in \sculpt.
+Each operation exists in two forms, distinguished by the number of parameters the block receives, which corresponds to physically different blocks:
 
 \begin{itemize}
-    \item \textbf{As unary operator}: The first two elements of the stack given by parameter are popped and operated and pushing the result back into the stack.
-    \item \textbf{As binary operator}: The first element of the stack given by parameter is popped and the second parameter, a number, are operated with the result of the first operation. The result is pushed back into the stack.
+    \item \textbf{Unary} (one parameter: a stack). The top two elements of the given stack are popped, the operation is applied, and the result is pushed back onto the same stack. For example, \texttt{add stack} pops the top two values and pushes their sum.
+    \item \textbf{Binary} (two parameters: a stack and a number literal). The top element of the given stack is popped, the operation is applied with the number literal as the second operand, and the result is pushed back onto the same stack. For example, \texttt{add stack 3} pops the top value and pushes its sum with~3.
 \end{itemize}
 
-In cases where the arithmetic is not defined, such as division by zero or modulo by zero, a \textit{nil} value is pushed into the stack.
-When a \textit{nil} value is encountered on arithmetic operations, other than comparisons, the program will halt in an error state.
+For non-commutative operations (subtraction, division and modulo), the first operand is always treated as the left-hand side and the second as the right-hand side; for instance, \texttt{sub stack 3} computes \emph{top\_of\_stack}~$-$~3.
+Comparison (\texttt{cmp}) follows the same unary and binary pattern: it pushes~1 if the left operand is greater than the right,~0 if they are equal, and~$-1$ if the left is less than the right.
+
+In cases where the arithmetic is not defined, such as division or modulo by zero, a \textit{nil} value is pushed onto the stack.
+When a \textit{nil} value is encountered in an arithmetic operation, other than comparison, the program halts in an error state.
+
+There is a special case for the comparison operation: when comparison is applied to an empty stack, or a stack with only one element, any missing value is treated as 0. This allows for the use of comparison to check if a stack is empty or has only one element, by comparing it to 0. This is semantically motivated by the fact that an empty stack can be considered as a stack with only 0s, and it allows for more flexible programming and allows for a formal Turing completeness proof, as will be shown in Section \ref{sec:results:turing}.
 
 \sculpt allows for flow control through the use of loops, conditional blocks and jump blocks.
 Loops are physically represented by a literal loop of connected blocks or a single block jump with a negative number as a parameter.
@@ -53,7 +57,7 @@ The program is written in a more traditional way, every block has a reserved nam
 Limitations of this implementation are that the program is not visually represented, connections between blocks are not shown and physical loops cannot be represented, forcing the user to only use jump operations for execution control.
 Our Fibonacci implementation can be rewritten in \sculpter as follows.
 
-\begin{algorithm}
+\begin{algorithm}[H]
     \caption{Fibonacci sequence in \sculpt}
     \label{alg:fib}
     \small
@@ -77,86 +81,284 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
     \end{algorithm}
 
 
+
 Writing a Fibonacci program is a simple task in \sculpt which gives us a good insight on how \sculpt looks and feels, yet it is not a complete proof of the language's capabilities.
 The language is Turing complete and it is capable of writing any program that can be written in any other programming language.
-To validate this, we will simulate a Turing machine in \sculpt.
-For this instance, an implementation of a 3-State Busy Beaver Turing machine will be used.
 
-Its \sculpter implementation is as follows:
+
+\section{Turing Completeness}
+\label{sec:results:turing}
+
+We now prove that \sculpt is Turing complete by showing that any Turing machine can be simulated by a \sculpt program. The proof proceeds by constructing a translation $\Phi$ that maps an arbitrary Turing machine $M$ to a \sculpt program $\Phi(M)$, then showing that $\Phi(M)$ faithfully simulates $M$ step by step.
+
+\subsection{Preliminaries}
+\label{sec:results:turing:prelim}
+
+\paragraph{Turing Machine.}
+A Turing machine is defined as $M = (Q, \Gamma, b, \Sigma, \delta, q_0, F)$ where $Q$ is the finite set of states, $\Gamma$ the tape alphabet, $b \in \Gamma$ the blank symbol, $\Sigma \subseteq \Gamma \setminus \{b\}$ the input alphabet, $\delta: Q \times \Gamma \to Q \times \Gamma \times \{L, R\}$ the transition function, $q_0 \in Q$ the initial state, and $F \subseteq Q$ the set of halting (accepting) states.
+
+\paragraph{Instruction Reference.}
+For the purposes of this proof, the relevant \sculpt instructions have the following semantics. All stacks are FILO and hold rational numbers; any identifier not reserved for an instruction names a stack, created on first use and unbounded in size.
+
+\begin{itemize}
+    \item \texttt{push}~$n$~$S$: Push rational number $n$ onto stack $S$.
+    \item \texttt{pop}~$S$: Remove the top element of $S$. No-op if $S$ is empty.
+    \item \texttt{mov}~$S_1$~$S_2$: Pop the top of $S_2$ and push it onto $S_1$ ($S_1$ is the destination, $S_2$ the source). If $S_2$ is empty, push~0 onto $S_1$.
+    \item \texttt{dup}~$S$: Duplicate the top of $S$. If $S$ is empty, push~0.
+    \item \texttt{cmp}~$S$: Pop the top two elements $a, b$ of $S$; push $0$ if $a = b$, $-1$ if $a < b$, $1$ if $a > b$. Missing values are treated as~0.
+    \item \texttt{cmp}~$S$~$n$: Replace the top element $a$ of $S$ with $0$ if $a = n$, $-1$ if $a < n$, $1$ if $a > n$. On an empty stack, push $\mathrm{cmp}(0, n)$.
+    \item \texttt{?}~$S$: Pop the top of $S$. If the value is $\geq 0$, execute the next instruction; if the value is $< 0$ (or nil), skip the next instruction.
+    \item \texttt{jmp}~$k$: Move the program counter by relative offset~$k$.
+    \item \texttt{neg}~$S$: Negate the top of $S$ in place.
+    \item \texttt{mul}~$S$: Pop the top two elements, push their product.
+\end{itemize}
+
+\paragraph{Blank-Symbol Convention.}
+The value~0 encodes the blank tape symbol~$b$. Operations on empty stacks produce~0 wherever a value is needed: \texttt{cmp} treats missing values as~0; \texttt{dup} on an empty stack pushes~0; \texttt{mov} from an empty source pushes~0 onto the destination. This ensures that empty stacks behave identically to stacks filled with blanks, eliminating the need for explicit blank-extension code.
+
+\subsection{Encoding}
+\label{sec:results:turing:encoding}
+
+\paragraph{Tape Encoding via Two Stacks.}
+The tape is represented by two named stacks, \texttt{left} and \texttt{right}. The top of \texttt{right} encodes the current cell under the head (or blank if empty). The top of \texttt{left} encodes the cell immediately to the left of the head. Tape symbols are encoded as non-negative integers: $b \mapsto 0$, $\sigma_1 \mapsto 1$, $\sigma_2 \mapsto 2$, etc.
+
+An auxiliary stack \texttt{aux} is used for non-destructive symbol comparison during state transitions. It is empty between transitions and does not encode any part of the tape.
+
+\paragraph{State Encoding.}
+Each state $q \in Q$ maps to a contiguous block of instructions $B(q)$. Halting states map to the \texttt{HALT} block, which simply terminates execution.
+
+\paragraph{Blank Tape Initialization.}
+For input $w = w_1 \dots w_n$, the \texttt{INIT} block pushes $\mathrm{enc}(w_n), \dots, \mathrm{enc}(w_1)$ onto \texttt{right} (so the top is $\mathrm{enc}(w_1)$). For a blank initial tape, \texttt{INIT} is empty.
+
+\subsection{The Translation $\Phi$}
+\label{sec:results:turing:translation}
+
+Given a Turing machine $M = (Q, \Gamma, b, \Sigma, \delta, q_0, F)$, the translation $\Phi(M)$ produces a \sculpt program with the following structure:
+
+\begin{center}
+\begin{tabular}{l}
+\texttt{[ INIT block ]} \\
+\texttt{[ $B(q_0)$ ]} \\
+\texttt{[ $B(q_1)$ ]} \\
+\quad $\vdots$ \\
+\texttt{[ $B(q_n)$ ]} \\
+\texttt{[ HALT block ]}
+\end{tabular}
+\end{center}
+
+For each non-halting state $q \in Q$, the code block $B(q)$ consists of three phases.
+
+\paragraph{Phase 1: Read Current Cell (2 instructions).}
+
+\begin{algorithmic}
+\State \texttt{dup right} \Comment{copy top of \texttt{right}; pushes 0 if empty (blank)}
+\State \texttt{mov aux right} \Comment{transfer copy to \texttt{aux}; \texttt{right} restored}
+\end{algorithmic}
+
+After Phase~1, \texttt{aux}~$= [v]$ where $v = \mathrm{enc}(\text{current cell})$ (or $v = 0$ for blank), and \texttt{right} is unchanged.
+
+\paragraph{Phase 2: Symbol Dispatch Chain ($7|\Gamma|$ instructions).}
+For each symbol $\sigma_i \in \Gamma$, one block of 7~instructions performs an equality test:
+
+\begin{algorithmic}
+\State \texttt{dup aux} \Comment{\texttt{aux} = $[v, v]$}
+\State \texttt{cmp aux $\sigma_i$} \Comment{\texttt{aux} = $[\mathrm{cmp}(v, \sigma_i),\; v]$; binary cmp replaces top}
+\State \texttt{dup aux} \Comment{\texttt{aux} = $[r, r, v]$ where $r = \mathrm{cmp}(v, \sigma_i)$}
+\State \texttt{mul aux} \Comment{\texttt{aux} = $[r^2, v]$; $r^2 \in \{0, 1\}$}
+\State \texttt{neg aux} \Comment{\texttt{aux} = $[-r^2, v]$; 0 iff equal, $-1$ iff not}
+\State \texttt{? aux} \Comment{pops $-r^2$; execute next if $= 0$, skip if $= -1$}
+\State \texttt{jmp} \textit{offset}$(\sigma_i)$ \Comment{jump to handler (reached only on match)}
+\end{algorithmic}
+
+\noindent
+\textit{Correctness.} If $v = \mathrm{enc}(\sigma_i)$: cmp returns~0, $0^2 = 0$, $-0 = 0$, and \texttt{?}~on~0 executes (since $0 \geq 0$), so the jump is taken.
+If $v \neq \mathrm{enc}(\sigma_i)$: cmp returns~$\pm 1$, $(\pm 1)^2 = 1$, $-1 < 0$, and \texttt{?}~skips the jump.
+After~\texttt{?}~pops, \texttt{aux}~$= [v]$, preserving the cell value for the next comparison.
+
+\paragraph{Phase 3: Symbol Handlers ($5|\Gamma|$ instructions).}
+For each $\delta(q, \sigma_i) = (q', \sigma'_i, D)$, the handler writes the new symbol and moves the head:
+
+\begin{algorithmic}
+\State \texttt{pop aux} \Comment{discard cell value copy; \texttt{aux} = $\emptyset$}
+\State \texttt{pop right} \Comment{remove current cell}
+\State \texttt{push $\sigma'_i$ right} \Comment{write new symbol}
+\end{algorithmic}
+
+\noindent
+If $D = R$ (move right):
+\begin{algorithmic}
+\State \texttt{mov left right} \Comment{pop $\sigma'_i$ from \texttt{right}, push onto \texttt{left}}
+\State \texttt{jmp} \textit{offset}$(q')$ \Comment{jump to $B(q')$}
+\end{algorithmic}
+
+\noindent
+If $D = L$ (move left):
+\begin{algorithmic}
+\State \texttt{mov right left} \Comment{pop \texttt{left}'s top, push onto \texttt{right}; if empty, pushes 0}
+\State \texttt{jmp} \textit{offset}$(q')$ \Comment{jump to $B(q')$}
+\end{algorithmic}
+
+\paragraph{Implicit Blank Extension.}
+
+\begin{lemma}
+No explicit blank-extension code is required in any state block $B(q)$.
+\end{lemma}
+
+\begin{proof}
+By the blank-symbol convention:
+\begin{itemize}
+    \item Phase~1: \texttt{dup right} on an empty \texttt{right} pushes~0 (blank). \texttt{mov aux right} transfers this~0 to \texttt{aux}, restoring \texttt{right} to empty.
+    \item Phase~3, $D = R$: After \texttt{mov left right}, if \texttt{right} is now empty, the next Phase~1 reads~0 (blank).
+    \item Phase~3, $D = L$: \texttt{mov right left} on an empty \texttt{left} pushes~0 onto \texttt{right}.
+\end{itemize}
+At no point does the construction depend on explicit blank-pushing code. Each $B(q)$ has a fixed size regardless of tape boundaries.
+\end{proof}
+
+\paragraph{Block Size and Jump Offsets.}
+Each $B(q)$ has $|B(q)| = 2 + 12|\Gamma|$ instructions (2 for Phase~1, $7|\Gamma|$ for Phase~2, $5|\Gamma|$ for Phase~3), constant across all states.
+
+Let $C = 2 + 12|\Gamma|$ and $I = |\mathrm{INIT}|$. The jump offset from Phase~2's $\sigma_i$-block to its Phase~3 handler is:
+\[
+  \textit{offset}(\sigma_i) = 7|\Gamma| - 2i - 6
+\]
+The cross-block offset from the handler for $\sigma_i$ in $B(q_j)$ to $B(q_{j'})$ is:
+\[
+  \textit{offset}(q') = (j' - j)\,C - (7|\Gamma| + 5i + 6)
+\]
+All offsets are closed-form and computable at translation time.
+
+\subsection{Correctness}
+\label{sec:results:turing:correctness}
+
+\paragraph{Simulation Invariant.}
+Define the \sculpt program state to be \emph{$k$-consistent with $M$ on input $w$} if, after simulating $k$ steps of $M$:
+\begin{enumerate}
+    \item \texttt{aux} is empty.
+    \item The top of \texttt{right} (treating empty as $0 = \mathrm{enc}(b)$) equals $\mathrm{enc}(v_k[0])$, the encoding of the current cell.
+    \item The remaining elements of \texttt{right} encode cells to the right of the head.
+    \item The elements of \texttt{left} encode cells to the left (top = immediately left).
+    \item The program counter points to the first instruction of $B(q_k)$.
+\end{enumerate}
+
+\begin{theorem}[Halting Preservation]
+\label{thm:halting}
+If $M$ halts on input $w$ after $n$ steps, then $\Phi(M)$ reaches the \texttt{HALT} block and terminates.
+\end{theorem}
+
+\begin{theorem}[Non-Termination Preservation]
+\label{thm:nonhalt}
+If $M$ does not halt on input $w$, then $\Phi(M)$ never reaches the \texttt{HALT} block and does not terminate.
+\end{theorem}
+
+\begin{proof}[Proof of Theorems~\ref{thm:halting} and~\ref{thm:nonhalt}]
+We prove by induction on the computation step $k$ that the simulation invariant is maintained.
+
+\textit{Base case ($k = 0$).}
+\texttt{INIT} pushes the input encoding onto \texttt{right}. Stacks \texttt{left} and \texttt{aux} are empty. The program counter is at $B(q_0)$. The invariant holds by construction.
+
+\textit{Inductive step.}
+Assume $k$-consistency. Let $\delta(q_k, v_k[0]) = (q_{k+1}, \sigma', D)$.
+
+\textit{Phase~1:} \texttt{dup right} followed by \texttt{mov aux right} places $\mathrm{enc}(v_k[0])$ on \texttt{aux} (or~0 if \texttt{right} is empty). \texttt{right} is restored.
+
+\textit{Phase~2:} The dispatch chain tests each $\sigma_i \in \Gamma$. For $\sigma_i = v_k[0]$, the equality test succeeds (cmp returns~0, $0^2 = 0$, $\mathrm{neg}(0) = 0$, \texttt{?}~on~0 executes, jump taken). For $\sigma_i \neq v_k[0]$, the test fails ($\mathrm{cmp}$ returns~$\pm 1$, squared gives~1, negated gives~$-1$, \texttt{?}~skips). Each failed test leaves \texttt{aux}~$= [\mathrm{enc}(v_k[0])]$.
+
+\textit{Phase~3:} \texttt{pop aux} empties \texttt{aux} (condition~1 restored). \texttt{pop right} removes the current cell. \texttt{push $\sigma'$ right} writes the new symbol.
+
+\textit{Case $D = R$:}
+\texttt{mov left right} pops $\sigma'$ from \texttt{right} and pushes it onto \texttt{left}. Now \texttt{left}'s top is $\sigma'$ (the written cell, to the left of the new head position) and \texttt{right}'s top is the next cell to the right (or empty, representing blank).
+
+\textit{Case $D = L$:}
+\texttt{mov right left} pops the top of \texttt{left} and pushes it onto \texttt{right}. If \texttt{left} is empty, it pushes~0 (blank). Now \texttt{right}'s top is the cell to the left (or blank), correctly representing the new head position.
+
+In both cases, \texttt{jmp}~\textit{offset}$(q')$ sets the program counter to $B(q_{k+1})$, establishing $(k+1)$-consistency.
+
+By induction, the invariant holds for all $k$. If $M$ enters a halting state at step $n$, the jump targets the \texttt{HALT} block and execution terminates (Theorem~\ref{thm:halting}). If $M$ never halts, each state block executes a bounded non-zero number of instructions and transfers control to the next, so execution continues without bound (Theorem~\ref{thm:nonhalt}).
+\end{proof}
+
+\subsection{Generality and Complexity}
+\label{sec:results:turing:generality}
+
+The translation $\Phi$ is total (defined for every TM), computable, and produces programs of size $|\Phi(M)| = O(|Q| \times |\Gamma|)$. Since every computable function can be computed by some Turing machine, and $\Phi$ faithfully simulates any such machine in \sculpt, we conclude:
+
+\begin{theorem}
+\sculpt is Turing complete. \qed
+\end{theorem}
+
+\subsection{Worked Example: Busy Beaver Simulation}
+\label{sec:results:turing:busybeaver}
+
+As a concrete demonstration that \sculpt can simulate Turing machines, we exhibit an implementation of the 3-state Busy Beaver machine ($BB_3$). This machine uses states $\{A, B, C\}$, tape alphabet $\{0, 1\}$ with blank symbol~0, and is known to write six~1s on the tape before halting after 14~steps.
+
+The implementation uses a 4-stack encoding (\texttt{left}, \texttt{right}, \texttt{head}, \texttt{temp}) that stores the current cell in a dedicated \texttt{head} stack, an alternative to the 2-stack encoding used in the general proof. Each state block reads the current symbol from \texttt{head}, branches on its value using \texttt{cmp} and \texttt{?}, writes the new symbol, and moves the head by transferring values between \texttt{left}, \texttt{right}, and \texttt{head} via \texttt{mov}. Its correctness follows from the same underlying principle: \sculpt's named FILO stacks, conditional branching, and relative jumps suffice to encode arbitrary Turing machine configurations and transitions.
+
 
 \begin{algorithm}[H]
-    \caption{3-State Busy Beaver Turing machine in \sculpt}
-    \label{alg:busybeaver}
-    \small
-    \begin{algorithmic}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{left}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{right}
-    \State $push~0$ \textbf{head}
-    \State \textbf{// STATE A}
-    \State $push~1$ \textbf{temp}
-    \State $mov$ \textbf{temp} \textbf{head}
-    \State $cmp$ \textbf{temp}
-    \State $?$ \textbf{temp}
-    \State $jmp~13$ \textbf{// Go to A\_1}
-    \State $push~1$ \textbf{head}
-    \State $mov$ \textbf{right} \textbf{head}
-    \State $mov$ \textbf{head} \textbf{left}
-    \State \textbf{// STATE B}
-    \State $push~1$ \textbf{temp}
-    \State $mov$ \textbf{temp} \textbf{head}
-    \State $cmp$ \textbf{temp}
-    \State $?$ \textbf{temp}
-    \State $jmp~9$ \textbf{// Go to B\_1}
-    \State $push~1$ \textbf{head}
-    \State $mov$ \textbf{left} \textbf{head}
-    \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~-16$ 
-    \State \textbf{// A\_1}
-    \State $push~1$ \textbf{head}
-    \State $mov$ \textbf{left} \textbf{head}
-    \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~5$ \textbf{// Go to C}
-    \end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-    \caption{3-State Busy Beaver Turing machine in \sculpt (continued)}
-    \label{alg:busybeaver}
-    \small
-    \begin{algorithmic}
-    \State \textbf{// B\_1}
-    \State $push~1$ \textbf{head}
-    \State $mov$ \textbf{right} \textbf{head}
-    \State $mov$ \textbf{head} \textbf{left}
-    \State $jmp~-16$ \textbf{// Go to B}
-    \State \textbf{// STATE\_C}
-    \State $push~1$ \textbf{temp}
-    \State $mov$ \textbf{temp} \textbf{head}
-    \State $cmp$ \textbf{temp}
-    \State $?$ \textbf{temp}
-    \State $jmp~5$ \textbf{// Go to HALT}
-    \State $push~1$ \textbf{head}
-    \State $mov$ \textbf{left} \textbf{head}
-    \State $mov$ \textbf{head} \textbf{right}
-    \State $jmp~-25$ \textbf{// Go to B}
-    \State \textbf{// HALT}
-    \State $push~1$ \textbf{head}
-    \end{algorithmic}
+   \caption{3-State Busy Beaver Turing machine in \sculpt}
+   \label{alg:busybeaver}
+   \small
+   \begin{algorithmic}
+   \State $push~0$ \textbf{left}
+   \State $push~0$ \textbf{left}
+   \State $push~0$ \textbf{left}
+   \State $push~0$ \textbf{left}
+   \State $push~0$ \textbf{right}
+   \State $push~0$ \textbf{right}
+   \State $push~0$ \textbf{right}
+   \State $push~0$ \textbf{right}
+   \State $push~0$ \textbf{head}
+   \State \textbf{// STATE A}
+   \State $push~1$ \textbf{temp}
+   \State $mov$ \textbf{temp} \textbf{head}
+   \State $cmp$ \textbf{temp}
+   \State $?$ \textbf{temp}
+   \State $jmp~13$ \textbf{// Go to A\_1}
+   \State $push~1$ \textbf{head}
+   \State $mov$ \textbf{right} \textbf{head}
+   \State $mov$ \textbf{head} \textbf{left}
+   \State \textbf{// STATE B}
+   \State $push~1$ \textbf{temp}
+   \State $mov$ \textbf{temp} \textbf{head}
+   \State $cmp$ \textbf{temp}
+   \State $?$ \textbf{temp}
+   \State $jmp~9$ \textbf{// Go to B\_1}
+   \State $push~1$ \textbf{head}
+   \State $mov$ \textbf{left} \textbf{head}
+   \State $mov$ \textbf{head} \textbf{right}
+   \State $jmp~-16$ 
+   \State \textbf{// A\_1}
+   \State $push~1$ \textbf{head}
+   \State $mov$ \textbf{left} \textbf{head}
+   \State $mov$ \textbf{head} \textbf{right}
+   \State $jmp~5$ \textbf{// Go to C}
+   \State \textbf{// B\_1}
+   \State $push~1$ \textbf{head}
+   \State $mov$ \textbf{right} \textbf{head}
+   \State $mov$ \textbf{head} \textbf{left}
+   \State $jmp~-16$ \textbf{// Go to B}
+   \State \textbf{// STATE\_C}
+   \State $push~1$ \textbf{temp}
+   \State $mov$ \textbf{temp} \textbf{head}
+   \State $cmp$ \textbf{temp}
+   \State $?$ \textbf{temp}
+   \State $jmp~5$ \textbf{// Go to HALT}
+   \State $push~1$ \textbf{head}
+   \State $mov$ \textbf{left} \textbf{head}
+   \State $mov$ \textbf{head} \textbf{right}
+   \State $jmp~-25$ \textbf{// Go to B}
+   \State \textbf{// HALT}
+   \State $push~1$ \textbf{head}
+   \end{algorithmic}
 \end{algorithm}
 
 \normalsize
-This simulation of the Busy Beaver Turing machine is a simple program that runs for some time before halting.
-Since this simulation is of a Turing machine, it is capable of simulating any algorithm, thus proving that \sculpt is Turing complete.
+
+
+The general proof via $\Phi$ subsumes this example: $\Phi(BB_3)$ is a specific instance of the universal construction, producing a program of $2 + 12 \cdot 2 = 26$ instructions per state block (78 total for 3~states, plus initialization and halt), and its correctness follows immediately from Theorems~\ref{thm:halting} and~\ref{thm:nonhalt}.
 
 The complete implementation of \sculpt is open source and is available on GitHub\footnote{\url{https://github.com/Darkoyd/SCuLPT}}.
 
-\subsection{Interpreter Implementation}
+\section{Interpreter Implementation}
 \label{sec:results:interpreter}
 \sculpter is an interpreter for \sculpt built in Scala that allows users to write and execute \sculpt programs in a more traditional way.
 It leverages the Scala.js framework to provide a web-based interface for users.
@@ -166,13 +368,13 @@ Execution of the program is done in a step-by-step manner, allowing users to see
 \sculpter code is open source and is also available on GitHub\footnote{\url{https://github.com/Darkoyd/SCuLPTER}}.
 
 
-\subsection{Validation}
+\section{Validation}
 \label{sec:results:validation}
 To validate \sculpt, we have conducted a series of sessions with different users to test the language and its ecosystem.
 A total of 6 sessions were conducted with a total of 75 users, ranging from novices with no prior programming experience to expert programmers with years of experience in the field.
 The sessions were designed to evaluate the usability and accessibility of \sculpt, as well as the overall user experience of using the language.
 
-\subsubsection{Regarding Usability}
+\subsection{Regarding Usability}
 \label{sec:results:validation:usability}
 Usability was evaluated through questions in the survey given to users after the sessions, as well as through user interviews.
 The results of the usability questionnaire showed that users found \sculpt, from a physical standpoint, to be easy to use and understand, 
@@ -187,7 +389,7 @@ The blocks were able to withstand the repeated use and manipulation by the users
 
 These results shows that \sculpt as a building block construct and visual language performs as expected, with users sharing overall positive feedback regarding the usability of the language.
 
-\subsubsection{Regarding Computation}
+\subsection{Regarding Computation}
 \label{sec:results:validation:computation}
 
 Another section of the survey was dedicated to evaluate, from a more technical eye, the ease of use of \sculpt as a programming language.
@@ -206,7 +408,7 @@ Results show that \sculpt as a programming language can be easy to understand an
 The language is capable of writing any program, but it requires a certain level of understanding of the language and its capabilities.
 This is a common issue with programming languages that \sculpt tried to eliminate, but it is still present.
 
-\subsubsection{Regarding Aesthetics}
+\subsection{Regarding Aesthetics}
 \label{sec:results:validation:aesthetics}
 Special sessions were held with a group of artists to test their overall experience with \sculpt from their experience as artists.
 Results were surprisingly positive, with most users reporting that they enjoyed very much the experience of using \sculpt.
