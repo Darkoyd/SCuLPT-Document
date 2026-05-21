@@ -1,0 +1,52 @@
+% !TEX root = ../main.tex
+
+\section{Introducci\'on}
+\label{sec:introduction}
+
+Desde el nacimiento de la programaci\'on, la
+interfaz a trav\'es de la cual los programas se materializan en c\'odigo
+ha sido esencialmente la misma: un teclado y una pantalla. Llamamos a
+este arreglo el \emph{paradigma de la m\'aquina de escribir}. Es una
+herencia tan casual que rara vez se cuestiona, pero sus
+consecuencias son profundas y de a ratos silenciosas. Condiciona qui\'enes pueden programar,
+c\'omo aprenden a hacerlo y qu\'e formas de expresi\'on consideramos
+correctas dentro de la computaci\'on.
+
+Tres problemas convergen en este punto. Primero, la interfaz teclado-pantalla
+discrimina contra usuarios cuyas capacidades f\'isicas, cognitivas o
+sensoriales difieren del promedio asumido por sus dise\~nadores~\cite{ko23}.
+Segundo, la programaci\'on impone una curva de aprendizaje pronunciada y
+un umbral de entrada alto~\cite{bosse17gerosa}, lo que desalienta a una
+parte importante de la poblaci\'on incluso antes de que llegue a escribir
+su primera l\'inea de c\'odigo. Tercero, los lenguajes de programaci\'on 
+contempor\'aneos y su docencia descansan sobre esta interfaz plana, trayendo consigo los dos problemas 
+anteriores y sus repercusiones sobre quienes pretenden programar y c\'omo se acercan a la programaci\'on.
+Si la intenci\'on es que la programaci\'on sea un medio universal y abierto para el pensamiento, entonces 
+el paradigma de la m\'aquina de escribir es un obst\'aculo para pensar de formas distintas de lograrlo.
+La soluci\'ion podr\'ia radicar en la intersecci\'on entre la computaci\'on y el arte~\cite{hongji16creative}.
+
+La pregunta que orienta este trabajo es si es posible dise\~nar un
+lenguaje de programaci\'on que (i) materialice los programas en un
+soporte radicalmente distinto al texto plano, (ii) sirva y preserve las funcionalidades computacionales y las propiedades
+formales que se esperan de un lenguaje  y (iii) brinde un ecosistema de herramientas creativas 
+que permitan al usuario explorar e interactuar con la computaci\'on de forma libre y expresiva.
+La hip\'otesis es entonces que la expresi\'on estetica puede servir 
+como veh\'iculo legitimo para la computaci\'on. Ensamblar piezas tangibles puede ser, al tiempo,
+un acto escult\'orico y un acto de computaci\'on.
+
+\sculpt (\emph{Simple Cubic Language for Programming Tasks}) es la
+implementaci\'on de esa hip\'otesis. En t\'erminos generales, \sculpt
+es a la vez (a) un lenguaje de programaci\'on Turing-completo y su especificaci\'on formal, (b) una colecci\'on de piezas y sus caracteristicas de construcci\'on y
+(c) \sculpter, un entorno y \emph{runtime} web escrito en Scala~3 y
+Scala.js que permite escribir, depurar y ejecutar programas antes de
+ensamblarlos f\'isicamente.
+
+Este art\'iculo presenta el dise\~no fisico y l\'ogico de \sculpt, su sem\'antica, una
+demostraci\'on formal condensada de su Turing-completitud y una
+validaci\'on emp\'irica con varios grupos de participantes. La contribuci\'on principal
+no es t\'ecnica en sentido estricto, sino conceptual: mostrar que la
+\emph{tangibilidad}, la \emph{libertad est\'etica} y la
+\emph{computaci\'on} pueden coexistir en un mismo lenguaje
+sin que ninguna de las tres se sacrifique.
+
+\endinput

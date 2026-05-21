@@ -1,0 +1,155 @@
+% !TEX root = ../main.tex
+
+\section{Trabajo relacionado}
+\label{sec:related}
+
+\sculpt se inserta en una conversaci\'on que ya tiene varias d\'ecadas
+sobre c\'omo abrir la programaci\'on a p\'ublicos no especializados.
+Esta ha producido tres familias de lenguajes que conviene
+revisar por separado, ya que cada una resuelve parcialmente el
+problema que \sculpt plantea. Se nombran a estas familias
+\emph{lenguajes visuales y de bloques}, \emph{lenguajes tangibles para
+la ense\~nanza de la computaci\'on} y \emph{computaci\'on como pr\'actica
+art\'istica} (\emph{creative computing}). Al cierre de la secci\'on
+se posiciona a \sculpt frente a las tres.
+
+\subsection{Lenguajes visuales y de bloques}
+\label{sec:related:visual}
+
+La l\'inea de los lenguajes basados en bloques arranca con
+\emph{LogoBlocks}~\cite{begel96logoblocks} en 1996 y se consolida con
+\emph{Scratch}~\cite{resnick+09scratch}, desarrollado en el
+\emph{Lifelong Kindergarten Group} del MIT Media Lab. Scratch reemplaza
+la sintaxis textual por bloques arrastrables cuya forma define qu\'e
+encaja con qu\'e. Esto abre una exploración interesante sobre la sintaxis.
+La sintaxis en este tipo de lenguajes adquiere una dimenison geometrica.
+Los conjuntos de reglas que gobiernan la construcci\'on de programas son 
+ahora reglas fisicas. Esa idea ha sido extendida por \emph{Blockly}~\cite{fraser15blockly},
+una biblioteca de Google que genera c\'odigo en lenguajes objetivo
+(JavaScript, Python, Dart) a partir de programas en bloques, y por
+\emph{Snap!}~\cite{harvey13snap}, una reimplementaci\'on de Scratch
+con primer-orden de funciones y bloques personalizables, orientada a la
+educaci\'on universitaria.
+
+Estas propuestas pretenden reducir dr\'asticamente la fricci\'on sint\'actica
+para los principiantes y son hoy la herramienta de elecci\'on en la
+ense\~nanza temprana de la computaci\'on. Sus limitaciones, sin embargo,
+son congruentes con el diagn\'ostico de la problematica. Los
+bloques viven en una pantalla, dependen de un teclado (usualmente) y un \emph{mouse},
+y, por dise\~no, no admiten libertad est\'etica significativa
+m\'as all\'a de cambiar colores de fondo. La interfaz se ha simplificado, la computación mejorado,
+pero su soporte material no ha cambiado.
+
+\subsection{Lenguajes tangibles para la ense\~nanza}
+\label{sec:related:tangible}
+
+Una segunda familia traslada la programaci\'on al mundo f\'isico.
+\emph{AlgoBlock}~\cite{suzuki95algoblock} fue uno de los primeros
+sistemas en proponer bloques f\'isicos conectables como medio para
+construir programas, principalmente con prop\'ositos colaborativos
+entre ni\~nos. \emph{Tern}~\cite{horn07tern} extendi\'o la idea con piezas
+de madera reconocidas por visi\'on por computador, sin necesidad de
+electr\'onica embebida. M\'as recientemente, \emph{KIBO}~\cite{sullivan15kibo}
+combina bloques de madera con c\'odigos de barras leidos por un robot
+m\'ovil, y \emph{Cubetto}~\cite{cubetto}, comercializado en m\'ultiples
+mercados, usa una cuadricula y fichas magn\'eticas para programar el
+desplazamiento de un peque\~no robot. \emph{Osmo Coding}~\cite{osmo}
+sigue una l\'inea h\'ibrida, las piezas son f\'isicas pero la ejecuci\'on
+ocurre en una tableta que las observa por la c\'amara.
+
+Estos sistemas demuestran ampliamente que la tangibilidad reduce
+barreras cognitivas y motivacionales en p\'ublicos estudiantiles, en
+linea con literatura previa sobre \emph{tangible user 
+interfaces}~\cite{ishii97tangiblebits,marshall07tangible}. Comparten, 
+no obstante, tres limitaciones recurrentes. Primero, todos est\'an 
+dise\~nados como \emph{herramientas educativas}: su poder expresivo es 
+intencionalmente acotado y aplicado a un dominio específico, usualmente robotica. 
+Esto brinda una experiencia de programaci\'on m\'as concreta, manipulativa y estumulante 
+para los estudiantes, pero no dejan de ser entonces lenguajes de dominio espec\'ifico, o en otras 
+palabras, herramientas didacticas programables. Segundo, las piezas son cerradas. 
+Vienen en una forma, un color y un tama\~no preestablecidos por el 
+fabricante, y el usuario no puede siempre modificarlas sin destruir o alterar su 
+funcionalidad. Esta libertad, tanto est\'etica como funcional, por dise\~no esta ausente.
+Este af\'an por controlar la experiencia del usuario es comprensible en un contexto educativo, 
+sin embargo, limita la expresividad y la cantidad de usuarios que pueden usar estos sistemas.
+Libertad de modificacion con las piezas es relevante para usuarios con necesidades de
+accesibilidad, por ejemplo, que pueden necesitar piezas de un tama\~no, material o morfolog\'ia
+particular para manipularlas. Tercero, la mayor\'ia de estos sistemas vienen con una etiqueta de
+precio que no todas las instituciones educativas o individuos pueden pagar. Adicional a necesitar
+hardware (y a veces software) especializado, el costo de las piezas, su mantenimiento y acceso puede ser un
+obst\'aculo para su adopci\'on. Esto es especialmente relevante en contextos de bajos recursos,
+donde la accesibilidad a herramientas educativas resulta crucial para cerrar brechas de aprendizaje.
+
+\subsection{Computaci\'on como pr\'actica art\'istica}
+\label{sec:related:art}
+
+Una tercera tradici\'on aborda el problema desde un \'angulo distinto.
+Mantener la interfaz textual de la programaci\'on pero dirigida
+expl\'icitamente a la producci\'on art\'istica. \emph{Processing}, de
+Reas y Fry~\cite{reas07processing}, ofrece un dialecto de Java pensado
+para artistas visuales y dise\~nadores, y populariz\'o la idea de que
+escribir c\'odigo es una forma leg\'itima de pr\'actica art\'istica.
+\emph{Sonic Pi}, de Aaron y Blackwell~\cite{aaron16sonicpi}, construye
+sobre el motor de s\'intesis SuperCollider un superconjunto de Ruby
+orientado a \emph{live coding} musical, originalmente concebido como
+herramienta educativa para escuelas en Inglaterra. La pr\'actica del
+\emph{live coding}, tanto musical como visual, ha sido sistematizada
+como movimiento art\'istico-computacional propio~\cite{collins03livecoding},
+con festivales y comunidades dedicadas (\eg \emph{Algorave}).
+
+Estas iniciativas han demostrado que la programaci\'on \emph{puede} ser
+arte y que existe audiencia entrenada y entusiasta para esa visi\'on.
+Sin embargo, comparten un l\'imite estructural con la primera familia.
+No abandonan el paradigma de la m\'aquina de escribir. El artista que
+hace \emph{live coding} sigue tecleando sobre una pantalla en vivo (y estresandose porque el c\'odigo no compila)
+art\'istica final es sonido, video o imagen, no el cuerpo f\'isico del
+programa.
+
+\subsection{Posicionamiento de \sculpt}
+\label{sec:related:positioning}
+
+\sculpt se sit\'ua en la intersecci\'on poco transitada de las tres
+familias anteriores. Comparte con los lenguajes de bloques la idea de
+que la sintaxis puede ser una propiedad geom\'etrica de las piezas
+esencial para la construcci\'on de programas. La intuitividad natural de "encajar" piezas
+es un recurso poderoso para asimilar conceptos sint\'acticos complejos y los aterriza a una
+experiencia y logica de construcci\'on concreta y entendible. Encaja o no encaja.
+Comparte con los lenguajes tangibles la apuesta por sacar la programaci\'on de la 
+pantalla y llevarla al espacio tridimensional.
+Habilitarle al mundo a programar implica necesariamente abrir la programaci\'on a formas
+de acceso distintas a la tradicional. Se pretende aprovechar la naturaleza manipulativa y abierta
+de las fichas para abrir la programaci\'on a usuarios con distintas capacidades, recursos
+y necesidades de accesibilidad.
+Finalmente, comparte con la tradici\'on \emph{creative computing} la convicci\'on
+de que la pr\'actica art\'istica es un veh\'iculo leg\'itimo para la
+computaci\'on, no un adorno posterior. La tabla \ref{tab:related} resume
+las diferencias.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Comparaci\'on de \sculpt con familias relacionadas.}
+\label{tab:related}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+                          & Bloques/visuales & Tangibles edu. & Creative comp. & \sculpt \\
+\midrule
+Soporte f\'isico          & No  & S\'i & No  & S\'i \\
+Turing-completo           & Parcial & No & S\'i & S\'i \\
+Libertad est\'etica       & Baja & Baja & Media & Muy Alta \\
+P\'ublico objetivo        & Estudiantes/Novatos & Ni\~nos & Artistas & Mixto \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Hasta donde se sabe, \sculpt es el primer lenguaje que combina
+\emph{tangibilidad f\'isica}, \emph{Turing-completitud demostrada
+formalmente} y \emph{libertad est\'etica radical} en un mismo dise\~no.
+La radicalidad de la apertura est\'etica merece subrayarse: en \sculpt
+el usuario puede modificar libremente forma, tama\~no, color, material
+y textura de las piezas; lo \'unico restringido es la topolog\'ia de
+las conexiones. Una pieza puede ser un cubo PLA est\'andar o una figura
+animal tallada en madera, y el programa funcionar\'a igual mientras los
+puntos de acople respeten la especificaci\'on.
+
+\endinput

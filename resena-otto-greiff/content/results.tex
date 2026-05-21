@@ -1,0 +1,243 @@
+% !TEX root = ../main.tex
+
+\section{Resultados}
+\label{sec:results}
+
+\subsection{Especificaci\'on del lenguaje}
+\label{sec:results:language}
+
+\sculpt es un lenguaje funcional capaz de expresar cualquier programa
+computable. Su \'unica estructura de datos son pilas FILO de n\'umeros
+racionales, identificadas por una forma no reservada para una
+instrucci\'on. Las pilas se crean en la primera referencia, no tienen
+cota superior de tama\~no y admiten las operaciones \texttt{push},
+\texttt{pop}, \texttt{mov} y \texttt{dup}. La tabla \ref{tab:instructions}
+resume la sem\'antica de las instrucciones operativas.
+
+\begin{table}[h]
+\centering
+\caption{Instrucciones operativas de \sculpt. $S$ designa una pila;
+$n$ un n\'umero literal.}
+\label{tab:instructions}
+\begin{tabular}{@{}lp{0.74\linewidth}@{}}
+\toprule
+Instrucci\'on & Sem\'antica \\
+\midrule
+\texttt{push $n$ $S$}    & Apila $n$ en $S$. \\
+\texttt{pop $S$}         & Retira el tope de $S$. Es \emph{no-op} si $S$ est\'a vac\'ia. \\
+\texttt{mov $S_1$ $S_2$} & Saca el tope de $S_2$ y lo apila en $S_1$. Si $S_2$ est\'a vac\'ia, apila~0 en $S_1$. \\
+\texttt{dup $S$}         & Duplica el tope de $S$. Si $S$ est\'a vac\'ia, apila~0. \\
+\texttt{cmp $S$}         & Saca los dos topes $a,b$ y apila~$0$ si $a=b$, $-1$ si $a<b$, $1$ si $a>b$. \\
+\texttt{cmp $S$ $n$}     & Reemplaza el tope $a$ por $0$, $-1$ o $1$ comparando con $n$. \\
+\texttt{?\ $S$}          & Saca el tope; si es $\geq 0$ ejecuta la siguiente instrucci\'on, si es $<0$ la salta. \\
+\texttt{jmp $k$}         & Desplaza el contador de programa en $k$ posiciones (puede ser negativo). \\
+\texttt{neg $S$}         & Niega el tope de $S$ \emph{in situ}. \\
+\texttt{mul $S$}         & Saca los dos topes y apila su producto. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\sculpt soporta seis operaciones aritm\'eticas, suma, resta,
+multiplicaci\'on, divisi\'on, m\'odulo y comparaci\'on, en dos
+variantes f\'isicamente distintas: \emph{unaria} (opera sobre los dos
+topes de una pila) y \emph{binaria} (opera sobre el tope y un literal).
+Para operaciones no conmutativas, el primer operando es el lado
+izquierdo y el segundo el derecho; \texttt{sub stack 3} calcula
+\emph{tope\_de\_pila}~$-$~3. En aritm\'etica indefinida (\eg
+divisi\'on por cero) se apila un valor \textit{nil}; encontrarlo en una
+operaci\'on distinta de la comparaci\'on detiene el programa en estado
+de error. El control de flujo se construye con bucles f\'isicos
+(conexiones c\'iclicas de piezas), saltos relativos y un \emph{bloque
+pregunta} que ramifica seg\'un el signo del tope de una pila.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figures/ArtlangFibpng}
+\caption{Programa Fibonacci en \sculpt: las piezas distintas designan operaciones y las flechas el orden de ejecuci\'on. El programa
+llena la pila ``c\'irculo'' con la secuencia de Fibonacci.}
+\label{fig:fibonacci}
+\end{figure}
+
+La figura~\ref{fig:fibonacci} muestra un programa que calcula la secuencia
+de Fibonacci. Una segunda notaci\'on textual, equivalente y utilizada
+por el int\'erprete \sculpter, omite las flechas de conexi\'on y se
+lee como un lenguaje ensamblador. La notaci\'on textual no representa
+los bucles f\'isicos directamente y obliga a expresarlos como saltos.
+
+\subsection{Turing-completitud}
+\label{sec:results:turing}
+
+\sculpt es Turing-completo. La demostraci\'on procede por construcci\'on
+de una traducci\'on $\Phi$ que mapea una m\'aquina de Turing arbitraria
+$M = (Q, \Gamma, b, \Sigma, \delta, q_0, F)$ a un programa \sculpt
+$\Phi(M)$ que la simula paso a paso. La cinta se codifica con dos
+pilas, \texttt{left} y \texttt{right}: el tope de \texttt{right}
+representa la celda bajo el cabezal y el tope de \texttt{left} la
+celda inmediatamente a su izquierda. Los s\'imbolos se codifican como
+enteros no negativos, con $b \mapsto 0$. Una pila auxiliar \texttt{aux}
+soporta la comparaci\'on no destructiva durante las transiciones.
+
+Cada estado no terminal $q \in Q$ se traduce a un bloque $B(q)$ de
+tama\~no constante $|B(q)| = 2 + 12|\Gamma|$ instrucciones, dividido
+en tres fases: \emph{Fase~1} lee la celda actual y copia su valor a
+\texttt{aux} ($2$ instrucciones); \emph{Fase~2} es una cadena de
+despacho que prueba el valor contra cada s\'imbolo $\sigma_i \in
+\Gamma$ usando \texttt{cmp}, cuadrado (\texttt{mul x x}), \texttt{neg} y \texttt{?}
+($7|\Gamma|$ instrucciones); \emph{Fase~3} ejecuta el manejador
+correspondiente a la transici\'on $\delta(q, \sigma_i) = (q', \sigma'_i, D)$,
+que escribe el nuevo s\'imbolo y mueve el cabezal ($5|\Gamma|$
+instrucciones). Los estados de aceptaci\'on se traducen al bloque
+\texttt{HALT}, que termina la ejecuci\'on.
+
+Un lema clave de la construcci\'on muestra que \emph{no se requiere
+c\'odigo expl\'icito para extender la cinta hacia el infinito en blanco}.
+Como las operaciones \texttt{dup}, \texttt{mov} y \texttt{cmp} sobre
+pilas vac\'ias devuelven~0 por convenci\'on, y la codificaci\'on
+hace $b \mapsto 0$, las pilas vac\'ias se comportan id\'enticamente a
+pilas llenas de blancos. As\'i, cada $B(q)$ tiene tama\~no fijo
+independientemente de la frontera de la cinta.
+
+Sea $\Pi_k$ la configuraci\'on de \sculpter despu\'es de simular $k$
+pasos. Decimos que $\Pi_k$ es \emph{$k$-consistente con $M$} si
+\texttt{aux} est\'a vac\'ia, el tope de \texttt{right} codifica la
+celda actual, los dem\'as elementos codifican el resto de la cinta a
+ambos lados del cabezal y el contador de programa apunta al inicio de
+$B(q_k)$. Por inducci\'on sobre $k$ se prueba que la $k$-consistencia
+se preserva, lo que da los dos teoremas siguientes:
+
+\begin{thm}[Preservaci\'on del halting]
+\label{thm:halting}
+Si $M$ termina sobre la entrada $w$ en $n$ pasos, entonces $\Phi(M)$
+alcanza el bloque \texttt{HALT} y termina.
+\end{thm}
+
+\begin{thm}[Preservaci\'on de la no-terminaci\'on]
+\label{thm:nonhalt}
+Si $M$ no termina sobre la entrada $w$, entonces $\Phi(M)$ tampoco
+termina.
+\end{thm}
+
+La traducci\'on $\Phi$ es total, computable y produce programas de
+tama\~no $|\Phi(M)| = O(|Q| \cdot |\Gamma|)$. Como toda funci\'on
+computable se calcula con alguna m\'aquina de Turing, se sigue:
+
+\begin{thm}
+\sculpt es Turing-completo.\qed
+\end{thm}
+
+Como verificaci\'on emp\'irica de la traducci\'on se implement\'o el
+\emph{Busy Beaver} de tres estados (\(BB_3\)) en \sculpt, que escribe
+seis~1's en la cinta antes de detenerse al cabo de 14 pasos. El
+desarrollo completo de la prueba, las definiciones precisas de los
+\emph{offsets} de salto y el c\'odigo del $BB_3$ se encuentran en el
+documento de tesis original.
+
+\subsection{El \emph{runtime} \sculpter}
+\label{sec:results:runtime}
+
+\sculpter es un int\'erprete de \sculpt escrito en Scala~3 y compilado
+a JavaScript mediante Scala.js. Ofrece un editor textual donde se
+escribe el programa, botones para lexar, parsear y ejecutar, y un
+visor de estado paso a paso que muestra el contenido de cada pila en
+cada momento de la ejecuci\'on. Por ejecutarse en el navegador no
+requiere instalaci\'on adicional, lo que lo hace distribuible
+inmediatamente y \'util como herramienta de depuraci\'on antes del
+ensamblaje f\'isico. El c\'odigo fuente del lenguaje y del int\'erprete
+est\'an disponibles bajo licencia abierta~\cite{sculpt-repo,sculpter-repo}.
+
+\subsection{Validaci\'on emp\'irica}
+\label{sec:results:validation}
+
+\subsubsection{Usabilidad}
+La fisicalidad de las piezas fue el factor m\'as recurrente en los
+reportes positivos, especialmente en los grupos j\'ovenes, que
+identificaron y diferenciaron los componentes con facilidad. La
+integridad material de las piezas fue un punto de atenci\'on: el PLA es
+un pl\'astico relativamente blando, propenso a deformaci\'on con uso
+repetido. Algunas piezas se perdieron a lo largo de las sesiones y
+otras mostraron desgaste, pero el conjunto resisti\'o el ciclo de uso
+sin afectar la continuidad de las pruebas.
+
+\subsubsection{Programaci\'on}
+Aproximadamente el 50\,\% del total de participantes complet\'o las
+tareas computacionales asignadas. El desempe\~no por sub-poblaci\'on,
+sin embargo, no es el esperable. La tabla~\ref{tab:validation} resume los
+hallazgos por grupo.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Hallazgos de las tareas computacionales por sub-poblaci\'on.}
+\label{tab:validation}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Sub-poblaci\'on & Completitud & Observaci\'on cualitativa \\
+\midrule
+Ni\~nos                 & Baja      & Excelente manejo f\'isico; dificultad conceptual. \\
+Adolescentes novatos    & Media     & Completaron en $\sim$1{,}5\,h promedio. \\
+Adultos novatos         & Baja      & Comprensi\'on del lenguaje sin completar tareas. \\
+Programadores expertos  & Baja      & Sorprendentemente, dificultad similar a novatos. \\
+Artistas                & Nula      & Comprenden las piezas, no completan tareas. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+El resultado m\'as inesperado fue la dificultad de los programadores
+expertos: pese a su experiencia previa, no superaron a los
+adolescentes novatos en completitud. Una lectura plausible es que el
+modelo mental que aporta la experiencia con lenguajes textuales no
+transfiere directamente al razonamiento sobre pilas FILO ensambladas
+f\'isicamente. Los adolescentes, sin esos modelos previos, abordaron
+el lenguaje en sus propios t\'erminos.
+
+\subsubsection{Datos de la encuesta}
+La encuesta cuantitativa (escala Likert 1--5) se aplic\'o a un
+sub-conjunto de $n=25$ participantes para los que se obtuvieron
+respuestas completas. La tabla~\ref{tab:survey-likert} resume los rangos
+de media por bloque de preguntas.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Agregados de la encuesta cuantitativa ($n=25$, escala 1--5).}
+\label{tab:survey-likert}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Bloque de preguntas & Media (rango) \\
+\midrule
+Aspectos cuantitativos del lenguaje              & 2{,}2 -- 3{,}4 \\
+Evaluaci\'on comparativa frente a lenguajes textuales & 2{,}8 -- 3{,}5 \\
+Percepci\'on de docentes/evaluadores             & 4{,}0 -- 4{,}3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La diferencia entre los bloques es informativa. La percepci\'on
+t\'ecnica de los participantes es media-baja, consistente con la
+dificultad reportada para completar las tareas. La percepci\'on de
+los docentes que acompa\~naron las sesiones es claramente positiva,
+lo que sugiere viabilidad pedag\'ogica incluso cuando el desempe\~no
+inmediato de los aprendices es modesto. Las respuestas cualitativas
+refuerzan ambos lados: los participantes destacan que ``llevar
+programaci\'on al mundo 3D es una haza\~na'' y que el lenguaje es
+``interesante y creativo para ni\~nos peque\~nos'', pero tambi\'en
+reportan que ``los bloques a veces generan confusi\'on'' y que
+``los conceptos de operaciones son confusos''. Las sugerencias
+m\'as frecuentes apuntan a material did\'actico de apoyo
+(diapositivas, ejercicios incrementales) y a integraci\'on con
+dominios concretos como videojuegos o matem\'aticas.
+
+\subsubsection{Est\'etica}
+Las sesiones con artistas dieron los resultados m\'as positivos en
+percepci\'on. Los participantes valoraron la manipulaci\'on tangible
+y reportaron que ``la fisicalidad fue quintaesencial a su
+experiencia''. Aunque no completaron las tareas asignadas,
+expresaron satisfacci\'on con el proceso e inter\'es por seguir
+usando el lenguaje, al punto de solicitar sesiones adicionales en
+las que construyeron piezas no funcionales con prop\'osito
+puramente est\'etico. El uso emergente que dieron a las piezas, como
+ensambles no previstos en la especificaci\'on, exploraciones
+de la forma por la forma, y colaboraciones entre escultura e ilustración valida la apertura est\'etica como
+caracter\'istica diferenciadora del lenguaje.
+
+\endinput

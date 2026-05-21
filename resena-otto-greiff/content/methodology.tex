@@ -1,0 +1,112 @@
+% !TEX root = ../main.tex
+
+\section{Metodolog\'ia}
+\label{sec:methodology}
+
+\subsection{Dise\~no del lenguaje}
+\label{sec:methodology:design}
+
+\sculpt es, en rigor, dos lenguajes acoplados. El primero es un
+\emph{lenguaje visual y f\'isico}: una especificaci\'on de los
+componentes que pueden existir y de las reglas de construcci\'on entre ellos.
+El segundo es un \emph{lenguaje de programaci\'on} que define el
+comportamiento que cada componente representa cuando se ensambla
+junto a otros. Cada programa \sculpt es, simult\'aneamente, un objeto
+construible en el espacio tridimensional y una expresi\'on computable.
+
+El dise\~no del lenguaje sigui\'o un enfoque centrado en el usuario,
+con el objetivo expl\'icito de que el conjunto de componentes fuera
+reconocible para audiencias diversas. Cada componente se distingue
+mediante una forma simple pero \'unica, de modo que pueda
+identificarse sin recurrir a conocimiento previo ni a la lectura de
+texto. La sintaxis del lenguaje es una propiedad
+geom\'etrica: dos piezas encajan o no encajan, y la legalidad del
+programa se inspecciona f\'isica y mecanicamente.
+
+El conjunto de operaciones es deliberadamente m\'inimo. \sculpt tiene
+solo 13 instrucciones que operan sobre pilas FILO de n\'umeros
+racionales. Las pilas son la \'unica estructura de datos del lenguaje,
+y se crean impl\'icitamente la primera vez que una instrucci\'on las
+referencia. Cualquier forma no reservada para una instrucci\'on puede
+designar una pila, lo que extiende la libertad est\'etica del lenguaje
+tambi\'en al espacio de datos. Sobre este conjunto m\'inimo se obtiene
+Turing-completitud, como se demuestra en la seccion \ref{sec:results:turing}.
+
+La est\'etica de los componentes es, por dise\~no, abierta. La
+especificaci\'on solo restringe las conexiones entre piezas y el
+conjunto de \emph{features} que cada bloque debe ofrecer; la forma
+final, el tama\~no, el material, el color y la textura quedan al
+arbitrio de quien construye el programa. Un cubo PLA est\'andar, una
+figura tallada en madera o un trozo de papel garabateado y mal doblado 
+son piezas v\'alidas mientras los puntos de
+acople respeten la especificaci\'on. Esta apertura es lo que permite,
+al mismo tiempo, ajustar las piezas a necesidades de accesibilidad
+particulares (tama\~no, peso, contraste, textura) y abrir el lenguaje
+como medio de expresi\'on art\'istica.
+
+\subsection{Implementaci\'on f\'isica y \emph{runtime}}
+\label{sec:methodology:implementation}
+
+La implementaci\'on de referencia utilizada en las pruebas consta de
+piezas peque\~nas impresas en \'acido polil\'actico (PLA) de
+colores variados y piezas de melamina blanca, conectadas mediante imanes y juntas roscadas tipo
+codo. Esta combinaci\'on permite el ensamblaje y desensamblaje
+repetido sin herramientas, resistencia esctructural y facilita modificar el programa durante
+la sesi\'on.
+
+La fisicalidad del lenguaje conlleva un compromiso. Al ser un medio
+estrictamente f\'isico, la ejecuci\'on de un programa \sculpt depende
+de un \emph{int\'erprete humano}, que recorre las piezas y aplica las
+instrucciones. La interpretaci\'on humana es parte del ejercicio de
+\sculpt como acto performativo, pero no es confiable. Los errores
+son inevitables y el lenguaje no es tolerante a fallos en caso de errores de interpretación.
+Para compensar esta fragilidad, el ecosistema
+incluye \sculpter (\emph{Simple Cubic Language for Programming
+Task's Environment and Runtime}), un transpilador escrito en Scala~3
+que toma la representaci\'on textual de un programa \sculpt y lo
+ejecuta paso a paso. Gracias a Scala.js, \sculpter corre en cualquier
+navegador moderno, sin instalaci\'on adicional, lo que lo hace
+distribuible y accesible para quien quiera probar un programa antes
+de ensamblarlo f\'isicamente.
+
+\subsection{Protocolo de validaci\'on}
+\label{sec:methodology:validation}
+
+La validaci\'on se realiz\'o en seis sesiones con
+participantes repartidos en perfiles diversos: novatos sin
+experiencia previa en programaci\'on, programadores expertos con
+a\~nos de experiencia, estudiantes de secundaria, ni\~nos y
+profesionales del campo art\'istico. La diversidad de perfiles fue
+intencional. \sculpt aspira a ser inclusivo, y la validaci\'on debe
+ponerlo a prueba con pre\'ambulos cognitivos y motivacionales muy
+distintos.
+
+Cada sesi\'on sigui\'o cuatro fases. (1) Una \emph{introducci\'on}
+de 30 a 45~minutos, adaptada al perfil del grupo: m\'as detallada
+sobre los componentes f\'isicos para los novatos y m\'as t\'ecnica
+para los expertos. (2) Una fase de \emph{exploraci\'on libre} de
+una hora, sin tareas asignadas, en la que los participantes
+manipulan las piezas a su ritmo para familiarizarse con sus formas
+y conexiones. (3) Una fase de \emph{tareas computacionales} de
+dos horas, con conjuntos de problemas calibrados al nivel de cada
+grupo (\eg sumas iteradas, condicionales para romper bucles); los
+facilitadores resolv\'ian dudas pero el participante completaba la
+tarea por su cuenta. (4) Una \emph{encuesta y entrevista} final opcional
+sobre usabilidad, accesibilidad y experiencia general; en el caso
+de menores de edad, la encuesta tambi\'en la respondieron los
+docentes acompa\~nantes, con preguntas adicionales sobre la
+viabilidad de \sculpt como herramienta pedag\'ogica.
+
+El an\'alisis combin\'o m\'etodos cualitativos y cuantitativos.
+En lo cuantitativo se midi\'o el tiempo a tarea y el n\'umero de
+errores cometidos durante la fase de programaci\'on. En lo
+cualitativo se analizaron las entrevistas y las preguntas abiertas
+de la encuesta, buscando patrones recurrentes en la percepci\'on
+de las piezas, en los obst\'aculos sint\'acticos y en la
+experiencia est\'etica de manipular el lenguaje. Adicionalmente,
+con el subgrupo de artistas se realizaron sesiones extra
+dedicadas exclusivamente a la creaci\'on de piezas no funcionales,
+con el fin de evaluar a \sculpt como medio expresivo independiente
+de su capacidad computacional.
+
+\endinput

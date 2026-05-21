@@ -1,0 +1,62 @@
+% Reseña-artículo SCuLPT — Concurso Nacional Otto de Greiff
+% Documento anónimo: NO incluir afiliación institucional, autor ni director.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xspace}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{caption}
+\usepackage{acronym}
+\usepackage[backend=biber,style=numeric-comp,sorting=nyt,maxbibnames=99]{biblatex}
+\usepackage[hidelinks]{hyperref}
+
+\addbibresource{local.bib}
+
+% Convenciones cross-repo: \ie, \eg, \cf
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\cf}{cf.\xspace}
+
+% Macros del lenguaje (definidas localmente para evitar misis.cls)
+\newcommand{\sculpt}{SCuLPT\xspace}
+\newcommand{\sculpter}{SCuLPTER\xspace}
+
+% Entornos de teorema. Nombres "thm"/"lem" para evitar conflictos con
+% babel-spanish y con paquetes (algorithm, etc.) que reservan \theorem.
+\newtheorem{thm}{Teorema}
+\newtheorem{lem}[thm]{Lema}
+
+
+\title{C\'odigo como arte, arte como c\'odigo:\\
+       el lenguaje de programaci\'on \sculpt}
+\author{Seud\'onimo: \texttt{[SEUD\'ONIMO]}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\input{content/abstract}
+\input{content/introduction}
+\input{content/problem}
+\input{content/related-work}
+\input{content/methodology}
+\input{content/results}
+\input{content/discussion}
+\input{content/conclusion}
+
+\printbibliography
+
+\end{document}

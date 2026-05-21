@@ -1,0 +1,801 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{aaron16sonicpi}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=0a6a1c14b499ce24482796d265467a35}{%
+           family={Aaron},
+           familyi={A\bibinitperiod},
+           given={Samuel},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5cb3a6bc0a40d67b647076287598307d}{%
+           family={Blackwell},
+           familyi={B\bibinitperiod},
+           given={Alan\bibnamedelima F.},
+           giveni={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=f92b40a07710fc4148823c29def95f32}{%
+           family={Burnard},
+           familyi={B\bibinitperiod},
+           given={Pamela},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{fullhash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{fullhashraw}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{bibnamehash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{authorbibnamehash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{authornamehash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{authorfullhash}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \strng{authorfullhashraw}{7daf65b4f7f1a52283fbd7fab945ff31}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1752-7074}
+      \field{journaltitle}{Journal of Music, Technology and Education}
+      \field{number}{1}
+      \field{title}{The development of {Sonic Pi} and its use in educational partnerships: Co-creating pedagogies for learning computer programming}
+      \field{volume}{9}
+      \field{year}{2016}
+      \field{pages}{75\bibrangedash 94}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1386/jmte.9.1.75_1
+      \endverb
+    \endentry
+    \entry{begel96logoblocks}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=2694e1d90cf02deb1abecbc6e1f2f80a}{%
+           family={Begel},
+           familyi={B\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \strng{namehash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{fullhash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{fullhashraw}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{bibnamehash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{authorbibnamehash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{authornamehash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{authorfullhash}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \strng{authorfullhashraw}{2694e1d90cf02deb1abecbc6e1f2f80a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Electrical Engineering and Computer Science Department, MIT}
+      \field{title}{{LogoBlocks}: A graphical programming language for interacting with the world}
+      \field{year}{1996}
+    \endentry
+    \entry{bosse17gerosa}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=53529e42f3ff39a0109feafe496859d3}{%
+           family={Bosse},
+           familyi={B\bibinitperiod},
+           given={Yorah},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=c11f6103794cd3a90d5ab49eef4cb682}{%
+           family={Gerosa},
+           familyi={G\bibinitperiod},
+           given={Marco\bibnamedelima Aurélio},
+           giveni={M\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+      }
+      \strng{namehash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{fullhash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{fullhashraw}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{bibnamehash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{authorbibnamehash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{authornamehash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{authorfullhash}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \strng{authorfullhashraw}{4f8067368c9c82f6c1cb3e305c44d1c2}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0163-5948}
+      \field{journaltitle}{ACM SIGSOFT Software Engineering Notes}
+      \field{number}{6}
+      \field{title}{Why is programming so difficult to learn? {P}atterns of difficulties related to programming learning mid-stage}
+      \field{volume}{41}
+      \field{year}{2017}
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1145/3011286.3011301
+      \endverb
+    \endentry
+    \entry{collins03livecoding}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=d29dc6d849d966711eaee04085f6dc6f}{%
+           family={Collins},
+           familyi={C\bibinitperiod},
+           given={Nick},
+           giveni={N\bibinitperiod}}}%
+        {{hash=81cfd3b063dfb0f95eecd64f77942012}{%
+           family={McLean},
+           familyi={M\bibinitperiod},
+           given={Alex},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e0d731bf92324afe22802761f343eaed}{%
+           family={Rohrhuber},
+           familyi={R\bibinitperiod},
+           given={Julian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=02f9c0951db827303a37f98924d04738}{%
+           family={Ward},
+           familyi={W\bibinitperiod},
+           given={Adrian},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{60552ccef71920044c798b3758efbf79}
+      \strng{fullhash}{d128eec5c27594a5229bec626109cbb0}
+      \strng{fullhashraw}{d128eec5c27594a5229bec626109cbb0}
+      \strng{bibnamehash}{d128eec5c27594a5229bec626109cbb0}
+      \strng{authorbibnamehash}{d128eec5c27594a5229bec626109cbb0}
+      \strng{authornamehash}{60552ccef71920044c798b3758efbf79}
+      \strng{authorfullhash}{d128eec5c27594a5229bec626109cbb0}
+      \strng{authorfullhashraw}{d128eec5c27594a5229bec626109cbb0}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Organised Sound}
+      \field{number}{3}
+      \field{title}{Live coding in laptop performance}
+      \field{volume}{8}
+      \field{year}{2003}
+      \field{pages}{321\bibrangedash 330}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1017/S135577180300030X
+      \endverb
+    \endentry
+    \entry{fraser15blockly}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=a15029ab2bd6d2b9bb9f258ca6f4d39b}{%
+           family={Fraser},
+           familyi={F\bibinitperiod},
+           given={Neil},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{fullhash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{fullhashraw}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{bibnamehash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{authorbibnamehash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{authornamehash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{authorfullhash}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \strng{authorfullhashraw}{a15029ab2bd6d2b9bb9f258ca6f4d39b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the {IEEE} Blocks and Beyond Workshop}
+      \field{title}{Ten things we've learned from {Blockly}}
+      \field{year}{2015}
+      \field{pages}{49\bibrangedash 50}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1109/BLOCKS.2015.7369000
+      \endverb
+    \endentry
+    \entry{harvey13snap}{inproceedings}{}{}
+      \name{author}{9}{}{%
+        {{hash=3bc74e1f84908e583766f8adc2d42eb4}{%
+           family={Harvey},
+           familyi={H\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=b9b1995cc2779dc6b9e643bfd6fbb20c}{%
+           family={Garcia},
+           familyi={G\bibinitperiod},
+           given={Daniel\bibnamedelima D.},
+           giveni={D\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=bf1096dbd39287dddd67576397fbf107}{%
+           family={Barnes},
+           familyi={B\bibinitperiod},
+           given={Tiffany},
+           giveni={T\bibinitperiod}}}%
+        {{hash=7333703aa161df7223c5bfc0650454bd}{%
+           family={Titterton},
+           familyi={T\bibinitperiod},
+           given={Nathaniel},
+           giveni={N\bibinitperiod}}}%
+        {{hash=65292ccef40b39e7335c2d84e156e0ef}{%
+           family={Armendariz},
+           familyi={A\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod}}}%
+        {{hash=7c2578e87a0f9c9afcd1a249fcca62e9}{%
+           family={Segars},
+           familyi={S\bibinitperiod},
+           given={Luke},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d9060ca244310fe6f5e5935e4f78d88f}{%
+           family={Lemon},
+           familyi={L\bibinitperiod},
+           given={Eugene},
+           giveni={E\bibinitperiod}}}%
+        {{hash=708f2074ca244c6a80c5a6d97ecd3c27}{%
+           family={Morris},
+           familyi={M\bibinitperiod},
+           given={Sean},
+           giveni={S\bibinitperiod}}}%
+        {{hash=85dbc92350a28ae6538f7fe3eb628632}{%
+           family={Paley},
+           familyi={P\bibinitperiod},
+           given={Josh},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d0e2cc60bed93beac345b05b550a150}
+      \strng{fullhash}{ef288ade35d100a6b03eef3a597e1f03}
+      \strng{fullhashraw}{ef288ade35d100a6b03eef3a597e1f03}
+      \strng{bibnamehash}{ef288ade35d100a6b03eef3a597e1f03}
+      \strng{authorbibnamehash}{ef288ade35d100a6b03eef3a597e1f03}
+      \strng{authornamehash}{7d0e2cc60bed93beac345b05b550a150}
+      \strng{authorfullhash}{ef288ade35d100a6b03eef3a597e1f03}
+      \strng{authorfullhashraw}{ef288ade35d100a6b03eef3a597e1f03}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 44th ACM Technical Symposium on Computer Science Education ({SIGCSE})}
+      \field{title}{{Snap!} ({Build Your Own Blocks})}
+      \field{year}{2013}
+      \field{pages}{759}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1145/2445196.2445507
+      \endverb
+    \endentry
+    \entry{horn07tern}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=a444e182086f2fce8e955c9731af244e}{%
+           family={Horn},
+           familyi={H\bibinitperiod},
+           given={Michael\bibnamedelima S.},
+           giveni={M\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=077bda01490c68cca996ec85afec5e88}{%
+           family={Jacob},
+           familyi={J\bibinitperiod},
+           given={Robert\bibnamedelimb J.\bibnamedelimi K.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{fullhash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{fullhashraw}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{bibnamehash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{authorbibnamehash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{authornamehash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{authorfullhash}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \strng{authorfullhashraw}{bce44131b7e29e8ec14de680cb7e9eb5}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 1st International Conference on Tangible and Embedded Interaction ({TEI})}
+      \field{title}{Designing tangible programming languages for classroom use}
+      \field{year}{2007}
+      \field{pages}{159\bibrangedash 162}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1145/1226969.1227003
+      \endverb
+    \endentry
+    \entry{ishii97tangiblebits}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=f9477c2d8165fba57b180a69748ccead}{%
+           family={Ishii},
+           familyi={I\bibinitperiod},
+           given={Hiroshi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=8adb7cedb86fc6c1a6e6632fadb2d2db}{%
+           family={Ullmer},
+           familyi={U\bibinitperiod},
+           given={Brygg},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{fullhash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{fullhashraw}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{bibnamehash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{authorbibnamehash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{authornamehash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{authorfullhash}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \strng{authorfullhashraw}{0be982f5c205f5ee1683c5fd44c8c43a}
+      \field{sortinit}{I}
+      \field{sortinithash}{8d291c51ee89b6cd86bf5379f0b151d8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the {ACM} {CHI} Conference on Human Factors in Computing Systems}
+      \field{title}{Tangible bits: towards seamless interfaces between people, bits and atoms}
+      \field{year}{1997}
+      \field{pages}{234\bibrangedash 241}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/258549.258715
+      \endverb
+    \endentry
+    \entry{ko23}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=2ad11eb70f573872886ad99898b2f7d4}{%
+           family={Ko},
+           familyi={K\bibinitperiod},
+           given={Amy\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{fullhash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{fullhashraw}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{bibnamehash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{authorbibnamehash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{authornamehash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{authorfullhash}{2ad11eb70f573872886ad99898b2f7d4}
+      \strng{authorfullhashraw}{2ad11eb70f573872886ad99898b2f7d4}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0028-0836}
+      \field{journaltitle}{Nature}
+      \field{month}{9}
+      \field{title}{How my broken elbow made the ableism of computer programming personal}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.1038/d41586-023-02885-y
+      \endverb
+    \endentry
+    \entry{marshall07tangible}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=ac6707ad29f62f50662d37ee4f1b1578}{%
+           family={Marshall},
+           familyi={M\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{fullhash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{fullhashraw}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{bibnamehash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{authorbibnamehash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{authornamehash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{authorfullhash}{ac6707ad29f62f50662d37ee4f1b1578}
+      \strng{authorfullhashraw}{ac6707ad29f62f50662d37ee4f1b1578}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Proceedings of the 1st International Conference on Tangible and Embedded Interaction ({TEI})}
+      \field{title}{Do tangible interfaces enhance learning?}
+      \field{year}{2007}
+      \field{pages}{163\bibrangedash 170}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/1226969.1227004
+      \endverb
+    \endentry
+    \entry{montessori12mind}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=8ef0e7032c9a1bb67c2e37706a0b1c6d}{%
+           family={Montessori},
+           familyi={M\bibinitperiod},
+           given={Maria},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Madras}%
+      }
+      \list{publisher}{1}{%
+        {Theosophical Publishing House}%
+      }
+      \strng{namehash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{fullhash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{fullhashraw}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{bibnamehash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{authorbibnamehash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{authornamehash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{authorfullhash}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \strng{authorfullhashraw}{8ef0e7032c9a1bb67c2e37706a0b1c6d}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Reprinted 2012}
+      \field{title}{The Absorbent Mind}
+      \field{year}{1949}
+    \endentry
+    \entry{oleson23inclusive}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=9432791772ab7cf72bd789279c3b6af4}{%
+           family={Oleson},
+           familyi={O\bibinitperiod},
+           given={Alannah},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c312ec49fbd97000adb04889b3d650d3}{%
+           family={Solomon},
+           familyi={S\bibinitperiod},
+           given={Meron},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6b2a4551dd4cf1ca898a4e4b4d4e8d55}{%
+           family={Perdriau},
+           familyi={P\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2ad11eb70f573872886ad99898b2f7d4}{%
+           family={Ko},
+           familyi={K\bibinitperiod},
+           given={Amy\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{2344badc0060b6462f656e8ef92f598c}
+      \strng{fullhash}{c45580726b39382b7c5f517094235943}
+      \strng{fullhashraw}{c45580726b39382b7c5f517094235943}
+      \strng{bibnamehash}{c45580726b39382b7c5f517094235943}
+      \strng{authorbibnamehash}{c45580726b39382b7c5f517094235943}
+      \strng{authornamehash}{2344badc0060b6462f656e8ef92f598c}
+      \strng{authorfullhash}{c45580726b39382b7c5f517094235943}
+      \strng{authorfullhashraw}{c45580726b39382b7c5f517094235943}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1073-0516}
+      \field{journaltitle}{ACM Transactions on Computer-Human Interaction}
+      \field{number}{1}
+      \field{title}{Teaching inclusive design skills with the {CIDER} assumption elicitation technique}
+      \field{volume}{30}
+      \field{year}{2023}
+      \field{pages}{1\bibrangedash 49}
+      \range{pages}{49}
+      \verb{doi}
+      \verb 10.1145/3549074
+      \endverb
+    \endentry
+    \entry{cubetto}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=7db8efde1bbd625fc50e7346c6855b40}{%
+           family={{Primo Toys}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{fullhash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{fullhashraw}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{bibnamehash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{authorbibnamehash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{authornamehash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{authorfullhash}{7db8efde1bbd625fc50e7346c6855b40}
+      \strng{authorfullhashraw}{7db8efde1bbd625fc50e7346c6855b40}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.primotoys.com/cubetto/}}
+      \field{note}{Accessed 2026-05-12}
+      \field{title}{Cubetto: hands-on coding for children}
+    \endentry
+    \entry{reas07processing}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=c1e1169a891153d99b4ff6adfd2f05f0}{%
+           family={Reas},
+           familyi={R\bibinitperiod},
+           given={Casey},
+           giveni={C\bibinitperiod}}}%
+        {{hash=94eb1434c985c7d7a922693b8098da23}{%
+           family={Fry},
+           familyi={F\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \list{publisher}{1}{%
+        {{MIT} Press}%
+      }
+      \strng{namehash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{fullhash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{fullhashraw}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{bibnamehash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{authorbibnamehash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{authornamehash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{authorfullhash}{998a4a0933ccfdcb39fa51415c3c023f}
+      \strng{authorfullhashraw}{998a4a0933ccfdcb39fa51415c3c023f}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Processing: A Programming Handbook for Visual Designers and Artists}
+      \field{year}{2007}
+    \endentry
+    \entry{resnick+09scratch}{article}{}{}
+      \name{author}{11}{}{%
+        {{hash=233322a94fdc535f0974d3219e0defcf}{%
+           family={Resnick},
+           familyi={R\bibinitperiod},
+           given={Mitchel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=de2860fd9460947e14283ce60dfbb8f1}{%
+           family={Maloney},
+           familyi={M\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=8fbae379530093a062d132f6da0ed0d5}{%
+           family={Monroy-Hernández},
+           familyi={M\bibinithyphendelim H\bibinitperiod},
+           given={Andrés},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d08f95c85f2a628c949e9b873336c7f1}{%
+           family={Rusk},
+           familyi={R\bibinitperiod},
+           given={Natalie},
+           giveni={N\bibinitperiod}}}%
+        {{hash=34568b279c4fa97714a18ccb1aba4727}{%
+           family={Eastmond},
+           familyi={E\bibinitperiod},
+           given={Evelyn},
+           giveni={E\bibinitperiod}}}%
+        {{hash=60478bd7a98edcd9dcab076b6332b1b4}{%
+           family={Brennan},
+           familyi={B\bibinitperiod},
+           given={Karen},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b37507b397face264f2095531c99cfb2}{%
+           family={Millner},
+           familyi={M\bibinitperiod},
+           given={Amon},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d5829bd6663e373d77aefdcbe3531479}{%
+           family={Rosenbaum},
+           familyi={R\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+        {{hash=2c2f27e2eb5220cda2e080a787b15847}{%
+           family={Silver},
+           familyi={S\bibinitperiod},
+           given={Jay},
+           giveni={J\bibinitperiod}}}%
+        {{hash=7774a75ded80a2cb4d96fe9d19a77c32}{%
+           family={Silverman},
+           familyi={S\bibinitperiod},
+           given={Brian},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a00d50263a5b5755a2f3122b0a19a537}{%
+           family={Kafai},
+           familyi={K\bibinitperiod},
+           given={Yasmin},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{94976424408c3ec2dec4c1ca397f0aa6}
+      \strng{fullhash}{dccc22966eea70f6b8bd369570c0c615}
+      \strng{fullhashraw}{dccc22966eea70f6b8bd369570c0c615}
+      \strng{bibnamehash}{dccc22966eea70f6b8bd369570c0c615}
+      \strng{authorbibnamehash}{dccc22966eea70f6b8bd369570c0c615}
+      \strng{authornamehash}{94976424408c3ec2dec4c1ca397f0aa6}
+      \strng{authorfullhash}{dccc22966eea70f6b8bd369570c0c615}
+      \strng{authorfullhashraw}{dccc22966eea70f6b8bd369570c0c615}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Communications of the ACM}
+      \field{number}{11}
+      \field{title}{Scratch: programming for all}
+      \field{volume}{52}
+      \field{year}{2009}
+      \field{pages}{60\bibrangedash 67}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1145/1592761.1592779
+      \endverb
+    \endentry
+    \entry{robins03learning}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=485b9db278f2099f4e982346a5049f24}{%
+           family={Robins},
+           familyi={R\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod}}}%
+        {{hash=76ce318a874098f6a1d117b53c7f1a9c}{%
+           family={Rountree},
+           familyi={R\bibinitperiod},
+           given={Janet},
+           giveni={J\bibinitperiod}}}%
+        {{hash=b0b59fc850aaf1317acd48b940306e2b}{%
+           family={Rountree},
+           familyi={R\bibinitperiod},
+           given={Nathan},
+           giveni={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{fullhash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{fullhashraw}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{bibnamehash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{authorbibnamehash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{authornamehash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{authorfullhash}{8d706cdef337fa83f52b06a9f17b9316}
+      \strng{authorfullhashraw}{8d706cdef337fa83f52b06a9f17b9316}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computer Science Education}
+      \field{number}{2}
+      \field{title}{Learning and teaching programming: a review and discussion}
+      \field{volume}{13}
+      \field{year}{2003}
+      \field{pages}{137\bibrangedash 172}
+      \range{pages}{36}
+      \verb{doi}
+      \verb 10.1076/csed.13.2.137.14200
+      \endverb
+    \endentry
+    \entry{sculpt-repo}{misc}{}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/Darkoyd/SCuLPT}}
+      \field{note}{Accessed 2026-05-20}
+      \field{title}{{SCuLPT} source code and language specification repository}
+    \endentry
+    \entry{sculpter-repo}{misc}{}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/Darkoyd/SCuLPTER}}
+      \field{note}{Accessed 2026-05-20}
+      \field{title}{{SCuLPTER}: web environment and runtime for {SCuLPT}}
+    \endentry
+    \entry{sullivan15kibo}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=00c5942ffbbc01357bed63156702b8b2}{%
+           family={Sullivan},
+           familyi={S\bibinitperiod},
+           given={Amanda},
+           giveni={A\bibinitperiod}}}%
+        {{hash=5bc55022ae9a60503d4f94f32d5ef831}{%
+           family={Bers},
+           familyi={B\bibinitperiod},
+           given={Marina\bibnamedelima Umaschi},
+           giveni={M\bibinitperiod\bibinitdelim U\bibinitperiod}}}%
+      }
+      \strng{namehash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{fullhash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{fullhashraw}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{bibnamehash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{authorbibnamehash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{authornamehash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{authorfullhash}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \strng{authorfullhashraw}{29c9c58d6ef7dee75450d02e0c1f230e}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Journal of Technology and Design Education}
+      \field{number}{1}
+      \field{title}{Robotics in the early childhood classroom: experiences with the {KIBO} robotics kit in preschool classrooms}
+      \field{volume}{26}
+      \field{year}{2016}
+      \field{pages}{3\bibrangedash 20}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/s10798-015-9304-5
+      \endverb
+    \endentry
+    \entry{suzuki95algoblock}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=8887d4a77131dbe9429d3ab3b0269ef5}{%
+           family={Suzuki},
+           familyi={S\bibinitperiod},
+           given={Hideyuki},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2c4f692d209c6232de09fec66545d79c}{%
+           family={Kato},
+           familyi={K\bibinitperiod},
+           given={Hiroshi},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{fullhash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{fullhashraw}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{bibnamehash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{authorbibnamehash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{authornamehash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{authorfullhash}{f67d0923711f8c407283d8f71b9a0398}
+      \strng{authorfullhashraw}{f67d0923711f8c407283d8f71b9a0398}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the First International Conference on Computer Support for Collaborative Learning ({CSCL})}
+      \field{title}{Interaction-level support for collaborative learning: {AlgoBlock}---an open programming language}
+      \field{year}{1995}
+      \field{pages}{349\bibrangedash 355}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.3115/222020.222828
+      \endverb
+    \endentry
+    \entry{osmo}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=41dd00581b2b49ef0908b1fc5ceaac7f}{%
+           family={{Tangible Play}},
+           familyi={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{fullhash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{fullhashraw}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{bibnamehash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{authorbibnamehash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{authornamehash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{authorfullhash}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \strng{authorfullhashraw}{41dd00581b2b49ef0908b1fc5ceaac7f}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.playosmo.com/en/coding/}}
+      \field{note}{Accessed 2026-05-12}
+      \field{title}{{Osmo Coding}: physical-digital coding games for children}
+    \endentry
+    \entry{hongji16creative}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=11c725cec38f9c8cc92eac0343e52114}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Hongji},
+           giveni={H\bibinitperiod}}}%
+        {{hash=da9f7c9885c62f90094bae30cd44886c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Lu},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{fullhash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{fullhashraw}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{bibnamehash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{authorbibnamehash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{authornamehash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{authorfullhash}{2eedd7c210f652a067649ebe6e552c4f}
+      \strng{authorfullhashraw}{2eedd7c210f652a067649ebe6e552c4f}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2352-8648}
+      \field{journaltitle}{Digital Communications and Networks}
+      \field{number}{2}
+      \field{title}{Promoting creative computing: origin, scope, research and applications}
+      \field{volume}{2}
+      \field{year}{2016}
+      \field{pages}{84\bibrangedash 91}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1016/j.dcan.2016.02.001
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
