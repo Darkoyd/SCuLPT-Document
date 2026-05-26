@@ -25,10 +25,10 @@ Instrucci\'on & Sem\'antica \\
 \midrule
 \texttt{push $n$ $S$}    & Apila $n$ en $S$. \\
 \texttt{pop $S$}         & Retira el tope de $S$. Es \emph{no-op} si $S$ est\'a vac\'ia. \\
-\texttt{mov $S_1$ $S_2$} & Saca el tope de $S_2$ y lo apila en $S_1$. Si $S_2$ est\'a vac\'ia, apila~0 en $S_1$. \\
-\texttt{dup $S$}         & Duplica el tope de $S$. Si $S$ est\'a vac\'ia, apila~0. \\
-\texttt{cmp $S$}         & Saca los dos topes $a,b$ y apila~$0$ si $a=b$, $-1$ si $a<b$, $1$ si $a>b$. \\
-\texttt{cmp $S$ $n$}     & Reemplaza el tope $a$ por $0$, $-1$ o $1$ comparando con $n$. \\
+\texttt{mov $S_1$ $S_2$} & Saca el tope de $S_2$ y lo apila en $S_1$. Si $S_2$ est\'a vac\'ia, apila~\texttt{nil} en $S_1$. \\
+\texttt{dup $S$}         & Duplica el tope de $S$. Si $S$ est\'a vac\'ia, apila~\texttt{nil}. \\
+\texttt{cmp $S$}         & Saca los dos topes $a,b$ y apila~$0$ si $a=b$, $-1$ si $a<b$, $1$ si $a>b$. Si alg\'un operando es \texttt{nil} o la pila tiene menos de dos elementos, apila~\texttt{nil}. \\
+\texttt{cmp $S$ $n$}     & Reemplaza el tope $a$ por $0$, $-1$ o $1$ comparando con $n$. Si $a$ es \texttt{nil} o $S$ est\'a vac\'ia, apila~\texttt{nil}. \\
 \texttt{?\ $S$}          & Saca el tope; si es $\geq 0$ ejecuta la siguiente instrucci\'on, si es $<0$ la salta. \\
 \texttt{jmp $k$}         & Desplaza el contador de programa en $k$ posiciones (puede ser negativo). \\
 \texttt{neg $S$}         & Niega el tope de $S$ \emph{in situ}. \\
@@ -73,8 +73,9 @@ $M = (Q, \Gamma, b, \Sigma, \delta, q_0, F)$ a un programa \sculpt
 $\Phi(M)$ que la simula paso a paso. La cinta se codifica con dos
 pilas, \texttt{left} y \texttt{right}: el tope de \texttt{right}
 representa la celda bajo el cabezal y el tope de \texttt{left} la
-celda inmediatamente a su izquierda. Los s\'imbolos se codifican como
-enteros no negativos, con $b \mapsto 0$. Una pila auxiliar \texttt{aux}
+celda inmediatamente a su izquierda. Los s\'imbolos no blancos se codifican como
+enteros positivos, y el blanco se identifica con el valor especial
+\texttt{nil}, esto es, $b \mapsto \texttt{nil}$. Una pila auxiliar \texttt{aux}
 soporta la comparaci\'on no destructiva durante las transiciones.
 
 Cada estado no terminal $q \in Q$ se traduce a un bloque $B(q)$ de
@@ -91,11 +92,16 @@ instrucciones). Los estados de aceptaci\'on se traducen al bloque
 
 Un lema clave de la construcci\'on muestra que \emph{no se requiere
 c\'odigo expl\'icito para extender la cinta hacia el infinito en blanco}.
-Como las operaciones \texttt{dup}, \texttt{mov} y \texttt{cmp} sobre
-pilas vac\'ias devuelven~0 por convenci\'on, y la codificaci\'on
-hace $b \mapsto 0$, las pilas vac\'ias se comportan id\'enticamente a
-pilas llenas de blancos. As\'i, cada $B(q)$ tiene tama\~no fijo
-independientemente de la frontera de la cinta.
+El argumento descansa en dos hechos: (\textit{i})~las operaciones
+\texttt{dup}, \texttt{mov} y \texttt{cmp} sobre pilas vac\'ias o con
+operandos faltantes producen \texttt{nil}; (\textit{ii})~la
+codificaci\'on identifica el s\'imbolo blanco con ese mismo valor, \ie
+$\mathrm{enc}(b) = \texttt{nil}$. Como el operador \texttt{?} trata
+\texttt{nil} como rama ``falsa'' y \texttt{nil} se propaga a trav\'es de
+\texttt{cmp}, \texttt{mul} y \texttt{neg}, las pilas vac\'ias representan
+de forma natural una cola infinita de celdas en blanco sin necesidad de
+materializarlas. As\'i, cada $B(q)$ tiene tama\~no fijo independientemente
+de la frontera de la cinta.
 
 Sea $\Pi_k$ la configuraci\'on de \sculpter despu\'es de simular $k$
 pasos. Decimos que $\Pi_k$ es \emph{$k$-consistente con $M$} si

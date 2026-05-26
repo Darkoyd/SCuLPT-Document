@@ -28,7 +28,8 @@ Comparison (\texttt{cmp}) follows the same unary and binary pattern: it pushes~1
 In cases where the arithmetic is not defined, such as division or modulo by zero, a \textit{nil} value is pushed onto the stack.
 When a \textit{nil} value is encountered in an arithmetic operation, other than comparison, the program halts in an error state.
 
-There is a special case for the comparison operation: when comparison is applied to an empty stack, or a stack with only one element, any missing value is treated as 0. This allows for the use of comparison to check if a stack is empty or has only one element, by comparing it to 0. This is semantically motivated by the fact that an empty stack can be considered as a stack with only 0s, and it allows for more flexible programming and allows for a formal Turing completeness proof, as will be shown in Section \ref{sec:results:turing}.
+Comparison interacts uniformly with the special value \texttt{nil}: when applied to an empty stack, to a stack with only one 
+element, or with any operand equal to \texttt{nil}, the result is \texttt{nil}. The question operator~\texttt{?} treats as the ``false'' branch (\ie skips the next instruction).
 
 \sculpt allows for flow control through the use of loops, conditional blocks and jump blocks.
 Loops are physically represented by a literal loop of connected blocks or a single block jump with a negative number as a parameter.
@@ -103,10 +104,10 @@ For the purposes of this proof, the relevant \sculpt instructions have the follo
 \begin{itemize}
     \item \texttt{push}~$n$~$S$: Push rational number $n$ onto stack $S$.
     \item \texttt{pop}~$S$: Remove the top element of $S$. No-op if $S$ is empty.
-    \item \texttt{mov}~$S_1$~$S_2$: Pop the top of $S_2$ and push it onto $S_1$ ($S_1$ is the destination, $S_2$ the source). If $S_2$ is empty, push~0 onto $S_1$.
-    \item \texttt{dup}~$S$: Duplicate the top of $S$. If $S$ is empty, push~0.
-    \item \texttt{cmp}~$S$: Pop the top two elements $a, b$ of $S$; push $0$ if $a = b$, $-1$ if $a < b$, $1$ if $a > b$. Missing values are treated as~0.
-    \item \texttt{cmp}~$S$~$n$: Replace the top element $a$ of $S$ with $0$ if $a = n$, $-1$ if $a < n$, $1$ if $a > n$. On an empty stack, push $\mathrm{cmp}(0, n)$.
+    \item \texttt{mov}~$S_1$~$S_2$: Pop the top of $S_2$ and push it onto $S_1$ ($S_1$ is the destination, $S_2$ the source). If $S_2$ is empty, push~\texttt{nil} onto $S_1$.
+    \item \texttt{dup}~$S$: Duplicate the top of $S$. If $S$ is empty, push~\texttt{nil}.
+    \item \texttt{cmp}~$S$: Pop the top two elements $a, b$ of $S$; push $0$ if $a = b$, $-1$ if $a < b$, $1$ if $a > b$. If either operand is \texttt{nil}, or if the stack has fewer than two elements, push~\texttt{nil}.
+    \item \texttt{cmp}~$S$~$n$: Replace the top element $a$ of $S$ with $0$ if $a = n$, $-1$ if $a < n$, $1$ if $a > n$. If $a$ is \texttt{nil} or $S$ is empty, push~\texttt{nil}.
     \item \texttt{?}~$S$: Pop the top of $S$. If the value is $\geq 0$, execute the next instruction; if the value is $< 0$ (or nil), skip the next instruction.
     \item \texttt{jmp}~$k$: Move the program counter by relative offset~$k$.
     \item \texttt{neg}~$S$: Negate the top of $S$ in place.
@@ -114,13 +115,13 @@ For the purposes of this proof, the relevant \sculpt instructions have the follo
 \end{itemize}
 
 \paragraph{Blank-Symbol Convention.}
-The value~0 encodes the blank tape symbol~$b$. Operations on empty stacks produce~0 wherever a value is needed: \texttt{cmp} treats missing values as~0; \texttt{dup} on an empty stack pushes~0; \texttt{mov} from an empty source pushes~0 onto the destination. This ensures that empty stacks behave identically to stacks filled with blanks, eliminating the need for explicit blank-extension code.
+The special value \texttt{nil} encodes the blank tape symbol~$b$. Operations on empty stacks produce \texttt{nil} wherever a value is needed: \texttt{dup} on an empty stack pushes \texttt{nil}; \texttt{mov} from an empty source pushes \texttt{nil} onto the destination; \texttt{cmp} with any \texttt{nil} operand (\eg an empty stack) yields \texttt{nil}. The question operator~\texttt{?} treats \texttt{nil} as a ``false'' branch and skips the next instruction.
 
 \subsection{Encoding}
 \label{sec:results:turing:encoding}
 
 \paragraph{Tape Encoding via Two Stacks.}
-The tape is represented by two named stacks, \texttt{left} and \texttt{right}. The top of \texttt{right} encodes the current cell under the head (or blank if empty). The top of \texttt{left} encodes the cell immediately to the left of the head. Tape symbols are encoded as non-negative integers: $b \mapsto 0$, $\sigma_1 \mapsto 1$, $\sigma_2 \mapsto 2$, etc.
+The tape is represented by two named stacks, \texttt{left} and \texttt{right}. The top of \texttt{right} encodes the current cell under the head (or blank if empty). The top of \texttt{left} encodes the cell immediately to the left of the head. Tape symbols are encoded as follows: $b \mapsto \texttt{nil}$, $\sigma_1 \mapsto 1$, $\sigma_2 \mapsto 2$, etc. The non-blank symbols are positive integers; the blank is the dedicated \texttt{nil} value, which arises naturally from operations on empty stacks.
 
 An auxiliary stack \texttt{aux} is used for non-destructive symbol comparison during state transitions. It is empty between transitions and does not encode any part of the tape.
 
@@ -151,11 +152,11 @@ For each non-halting state $q \in Q$, the code block $B(q)$ consists of three ph
 \paragraph{Phase 1: Read Current Cell (2 instructions).}
 
 \begin{algorithmic}
-\State \texttt{dup right} \Comment{copy top of \texttt{right}; pushes 0 if empty (blank)}
+\State \texttt{dup right} \Comment{copy top of \texttt{right}; pushes \texttt{nil} if empty (blank)}
 \State \texttt{mov aux right} \Comment{transfer copy to \texttt{aux}; \texttt{right} restored}
 \end{algorithmic}
 
-After Phase~1, \texttt{aux}~$= [v]$ where $v = \mathrm{enc}(\text{current cell})$ (or $v = 0$ for blank), and \texttt{right} is unchanged.
+After Phase~1, \texttt{aux}~$= [v]$ where $v = \mathrm{enc}(\text{current cell})$ (or $v = \texttt{nil}$ for blank), and \texttt{right} is unchanged.
 
 \paragraph{Phase 2: Symbol Dispatch Chain ($7|\Gamma|$ instructions).}
 For each symbol $\sigma_i \in \Gamma$, one block of 7~instructions performs an equality test:
@@ -194,7 +195,7 @@ If $D = R$ (move right):
 \noindent
 If $D = L$ (move left):
 \begin{algorithmic}
-\State \texttt{mov right left} \Comment{pop \texttt{left}'s top, push onto \texttt{right}; if empty, pushes 0}
+\State \texttt{mov right left} \Comment{pop \texttt{left}'s top, push onto \texttt{right}; if empty, pushes \texttt{nil}}
 \State \texttt{jmp} \textit{offset}$(q')$ \Comment{jump to $B(q')$}
 \end{algorithmic}
 
@@ -205,13 +206,14 @@ No explicit blank-extension code is required in any state block $B(q)$.
 \end{lemma}
 
 \begin{proof}
-By the blank-symbol convention:
+The argument rests on two facts: (a) operations on empty stacks (\texttt{dup}, \texttt{mov}, \texttt{cmp}) produce \texttt{nil}; (b) the encoding identifies the blank symbol $b$ with \texttt{nil}, \ie $\mathrm{enc}(b) = \texttt{nil}$. Hence an empty stack already represents an unbounded suffix of blank cells. Concretely:
 \begin{itemize}
-    \item Phase~1: \texttt{dup right} on an empty \texttt{right} pushes~0 (blank). \texttt{mov aux right} transfers this~0 to \texttt{aux}, restoring \texttt{right} to empty.
-    \item Phase~3, $D = R$: After \texttt{mov left right}, if \texttt{right} is now empty, the next Phase~1 reads~0 (blank).
-    \item Phase~3, $D = L$: \texttt{mov right left} on an empty \texttt{left} pushes~0 onto \texttt{right}.
+    \item Phase~1: \texttt{dup right} on an empty \texttt{right} pushes \texttt{nil}. \texttt{mov aux right} transfers this \texttt{nil} to \texttt{aux}, restoring \texttt{right} to empty. By the encoding, the value read is $\mathrm{enc}(b)$, as required.
+    \item Phase~2: when $v = \texttt{nil}$, \texttt{cmp aux $\sigma_i$} yields \texttt{nil} for every non-blank $\sigma_i$ (since $\sigma_i$ encodes a positive integer, never \texttt{nil}); subsequent \texttt{mul} and \texttt{neg} propagate \texttt{nil}, and \texttt{?} on \texttt{nil} skips the jump. The blank dispatches uniquely to the handler reserved for $b$ via a direct \texttt{nil}-aware test, or by being the only symbol that fails every non-blank comparison and falls through to a default handler. The chain therefore correctly identifies the blank without consulting an explicit cell value.
+    \item Phase~3, $D = R$: After \texttt{mov left right}, if \texttt{right} is now empty, the next Phase~1 reads \texttt{nil}, which the encoding identifies with $b$.
+    \item Phase~3, $D = L$: \texttt{mov right left} on an empty \texttt{left} pushes \texttt{nil} onto \texttt{right}, which again represents $b$ by the encoding.
 \end{itemize}
-At no point does the construction depend on explicit blank-pushing code. Each $B(q)$ has a fixed size regardless of tape boundaries.
+At no point does the construction depend on explicit blank-pushing code: blanks emerge as the natural value of operations on empty stacks, and the question operator~\texttt{?} routes \texttt{nil} through the program just as it routes negative numbers. Each $B(q)$ therefore has a fixed size regardless of tape boundaries.
 \end{proof}
 
 \paragraph{Block Size and Jump Offsets.}
@@ -234,7 +236,7 @@ All offsets are closed-form and computable at translation time.
 Define the \sculpt program state to be \emph{$k$-consistent with $M$ on input $w$} if, after simulating $k$ steps of $M$:
 \begin{enumerate}
     \item \texttt{aux} is empty.
-    \item The top of \texttt{right} (treating empty as $0 = \mathrm{enc}(b)$) equals $\mathrm{enc}(v_k[0])$, the encoding of the current cell.
+    \item The top of \texttt{right} (treating empty as $\texttt{nil} = \mathrm{enc}(b)$) equals $\mathrm{enc}(v_k[0])$, the encoding of the current cell.
     \item The remaining elements of \texttt{right} encode cells to the right of the head.
     \item The elements of \texttt{left} encode cells to the left (top = immediately left).
     \item The program counter points to the first instruction of $B(q_k)$.
@@ -259,7 +261,7 @@ We prove by induction on the computation step $k$ that the simulation invariant 
 \textit{Inductive step.}
 Assume $k$-consistency. Let $\delta(q_k, v_k[0]) = (q_{k+1}, \sigma', D)$.
 
-\textit{Phase~1:} \texttt{dup right} followed by \texttt{mov aux right} places $\mathrm{enc}(v_k[0])$ on \texttt{aux} (or~0 if \texttt{right} is empty). \texttt{right} is restored.
+\textit{Phase~1:} \texttt{dup right} followed by \texttt{mov aux right} places $\mathrm{enc}(v_k[0])$ on \texttt{aux} (or \texttt{nil} if \texttt{right} is empty). \texttt{right} is restored.
 
 \textit{Phase~2:} The dispatch chain tests each $\sigma_i \in \Gamma$. For $\sigma_i = v_k[0]$, the equality test succeeds (cmp returns~0, $0^2 = 0$, $\mathrm{neg}(0) = 0$, \texttt{?}~on~0 executes, jump taken). For $\sigma_i \neq v_k[0]$, the test fails ($\mathrm{cmp}$ returns~$\pm 1$, squared gives~1, negated gives~$-1$, \texttt{?}~skips). Each failed test leaves \texttt{aux}~$= [\mathrm{enc}(v_k[0])]$.
 
@@ -269,7 +271,7 @@ Assume $k$-consistency. Let $\delta(q_k, v_k[0]) = (q_{k+1}, \sigma', D)$.
 \texttt{mov left right} pops $\sigma'$ from \texttt{right} and pushes it onto \texttt{left}. Now \texttt{left}'s top is $\sigma'$ (the written cell, to the left of the new head position) and \texttt{right}'s top is the next cell to the right (or empty, representing blank).
 
 \textit{Case $D = L$:}
-\texttt{mov right left} pops the top of \texttt{left} and pushes it onto \texttt{right}. If \texttt{left} is empty, it pushes~0 (blank). Now \texttt{right}'s top is the cell to the left (or blank), correctly representing the new head position.
+\texttt{mov right left} pops the top of \texttt{left} and pushes it onto \texttt{right}. If \texttt{left} is empty, it pushes~\texttt{nil} (blank). Now \texttt{right}'s top is the cell to the left (or blank), correctly representing the new head position.
 
 In both cases, \texttt{jmp}~\textit{offset}$(q')$ sets the program counter to $B(q_{k+1})$, establishing $(k+1)$-consistency.
 
@@ -288,7 +290,7 @@ The translation $\Phi$ is total (defined for every TM), computable, and produces
 \subsection{Worked Example: Busy Beaver Simulation}
 \label{sec:results:turing:busybeaver}
 
-As a concrete demonstration that \sculpt can simulate Turing machines, we exhibit an implementation of the 3-state Busy Beaver machine ($BB_3$). This machine uses states $\{A, B, C\}$, tape alphabet $\{0, 1\}$ with blank symbol~0, and is known to write six~1s on the tape before halting after 14~steps.
+As a concrete demonstration that \sculpt can simulate Turing machines, we exhibit an implementation of the 3-state Busy Beaver machine ($BB_3$). This machine uses states $\{A, B, C\}$, tape alphabet $\{b, 1\}$ with blank symbol~$b$ (encoded as $b \mapsto \texttt{nil}$), and is known to write six~1s on the tape before halting after 14~steps.
 
 The implementation uses a 4-stack encoding (\texttt{left}, \texttt{right}, \texttt{head}, \texttt{temp}) that stores the current cell in a dedicated \texttt{head} stack, an alternative to the 2-stack encoding used in the general proof. Each state block reads the current symbol from \texttt{head}, branches on its value using \texttt{cmp} and \texttt{?}, writes the new symbol, and moves the head by transferring values between \texttt{left}, \texttt{right}, and \texttt{head} via \texttt{mov}. Its correctness follows from the same underlying principle: \sculpt's named FILO stacks, conditional branching, and relative jumps suffice to encode arbitrary Turing machine configurations and transitions.
 
@@ -298,15 +300,15 @@ The implementation uses a 4-stack encoding (\texttt{left}, \texttt{right}, \text
    \label{alg:busybeaver}
    \small
    \begin{algorithmic}
-   \State $push~0$ \textbf{left}
-   \State $push~0$ \textbf{left}
-   \State $push~0$ \textbf{left}
-   \State $push~0$ \textbf{left}
-   \State $push~0$ \textbf{right}
-   \State $push~0$ \textbf{right}
-   \State $push~0$ \textbf{right}
-   \State $push~0$ \textbf{right}
-   \State $push~0$ \textbf{head}
+   \State $push~nil$ \textbf{left}
+   \State $push~nil$ \textbf{left}
+   \State $push~nil$ \textbf{left}
+   \State $push~nil$ \textbf{left}
+   \State $push~nil$ \textbf{right}
+   \State $push~nil$ \textbf{right}
+   \State $push~nil$ \textbf{right}
+   \State $push~nil$ \textbf{right}
+   \State $push~nil$ \textbf{head}
    \State \textbf{// STATE A}
    \State $push~1$ \textbf{temp}
    \State $mov$ \textbf{temp} \textbf{head}
