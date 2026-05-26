@@ -69,14 +69,14 @@ Our Fibonacci implementation can be rewritten in \sculpter as follows.
     \State $push~1$ \textbf{triangle}
     \State $dup$ \textbf{triangle}
     \State $dup$ \textbf{star}
-    \State $mov$ \textbf{star} \textbf{trapezoid}
-    \State $mov$ \textbf{triangle} \textbf{trapezoid}
+    \State $mov$ \textbf{trapezoid} \textbf{star}
+    \State $mov$ \textbf{trapezoid} \textbf{triangle}
     \State $add$ \textbf{trapezoid}
     \State $pop$ \textbf{star}
-    \State $mov$ \textbf{triangle} \textbf{star}
+    \State $mov$ \textbf{star} \textbf{triangle}
     \State $dup$ \textbf{trapezoid}
-    \State $mov$ \textbf{trapezoid} \textbf{circle}
-    \State $mov$ \textbf{trapezoid} \textbf{triangle}
+    \State $mov$ \textbf{circle} \textbf{trapezoid}
+    \State $mov$ \textbf{triangle} \textbf{trapezoid}
     \State $jmp$ \textbf{-10}
     \end{algorithmic}
     \end{algorithm}
