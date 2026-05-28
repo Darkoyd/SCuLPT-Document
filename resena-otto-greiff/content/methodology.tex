@@ -14,7 +14,7 @@ comportamiento que cada componente representa cuando se ensambla
 junto a otros. Cada programa \sculpt es, simult\'aneamente, un objeto
 construible en el espacio tridimensional y una expresi\'on computable.
 
-El dise\~no del lenguaje sigui\'o un enfoque centrado en el usuario,
+El dise\~no del lenguaje sigue un enfoque centrado en el usuario,
 con el objetivo expl\'icito de que el conjunto de componentes fuera
 reconocible para audiencias diversas. Cada componente se distingue
 mediante una forma simple pero \'unica, de modo que pueda
@@ -24,89 +24,268 @@ geom\'etrica: dos piezas encajan o no encajan, y la legalidad del
 programa se inspecciona f\'isica y mecanicamente.
 
 El conjunto de operaciones es deliberadamente m\'inimo. \sculpt tiene
-solo 13 instrucciones que operan sobre pilas FILO de n\'umeros
+solo 13 instrucciones que operan sobre pilas LIFO de n\'umeros
 racionales. Las pilas son la \'unica estructura de datos del lenguaje,
 y se crean impl\'icitamente la primera vez que una instrucci\'on las
 referencia. Cualquier forma no reservada para una instrucci\'on puede
 designar una pila, lo que extiende la libertad est\'etica del lenguaje
 tambi\'en al espacio de datos. Sobre este conjunto m\'inimo se obtiene
-Turing-completitud, como se demuestra en la seccion \ref{sec:results:turing}.
+Turing-completitud, como se demuestra en la Seccion \ref{sec:methodology:turing}.
 
 La est\'etica de los componentes es, por dise\~no, abierta. La
 especificaci\'on solo restringe las conexiones entre piezas y el
 conjunto de \emph{features} que cada bloque debe ofrecer; la forma
 final, el tama\~no, el material, el color y la textura quedan al
 arbitrio de quien construye el programa. Un cubo PLA est\'andar, una
-figura tallada en madera o un trozo de papel garabateado y mal doblado 
-son piezas v\'alidas mientras los puntos de
+figura tallada en madera o un trozo de papel garabateado y mal doblado
+pueden ser piezas v\'alidas mientras los puntos de
 acople respeten la especificaci\'on. Esta apertura es lo que permite,
 al mismo tiempo, ajustar las piezas a necesidades de accesibilidad
 particulares (tama\~no, peso, contraste, textura) y abrir el lenguaje
 como medio de expresi\'on art\'istica.
 
-\subsection{Implementaci\'on f\'isica y \emph{runtime}}
+\subsection{Implementaci\'on f\'isica}
 \label{sec:methodology:implementation}
 
 La implementaci\'on de referencia utilizada en las pruebas consta de
 piezas peque\~nas impresas en \'acido polil\'actico (PLA) de
-colores variados y piezas de melamina blanca, conectadas mediante imanes y juntas roscadas tipo
-codo. Esta combinaci\'on permite el ensamblaje y desensamblaje
-repetido sin herramientas, resistencia esctructural y facilita modificar el programa durante
-la sesi\'on.
+colores variados y piezas de melamina blanca, conectadas mediante imanes
+y juntas roscadas tipo codo. Esta combinaci\'on permite el ensamblaje y
+desensamblaje repetido sin herramientas, ofrece resistencia estructural
+suficiente para manipular el programa sin que colapse y facilita modificarlo
+durante la sesi\'on. El conjunto de piezas se distribuye como modelos
+imprimibles y planos de corte, de modo que la implementaci\'on de
+referencia pueda replicarse, adaptarse a otros materiales o ajustarse a
+necesidades particulares de accesibilidad.
 
 La fisicalidad del lenguaje conlleva un compromiso. Al ser un medio
 estrictamente f\'isico, la ejecuci\'on de un programa \sculpt depende
 de un \emph{int\'erprete humano}, que recorre las piezas y aplica las
 instrucciones. La interpretaci\'on humana es parte del ejercicio de
-\sculpt como acto performativo, pero no es confiable. Los errores
-son inevitables y el lenguaje no es tolerante a fallos en caso de errores de interpretación.
-Para compensar esta fragilidad, el ecosistema
-incluye \sculpter (\emph{Simple Cubic Language for Programming
-Task's Environment and Runtime}), un transpilador escrito en Scala~3
-que toma la representaci\'on textual de un programa \sculpt y lo
-ejecuta paso a paso. Gracias a Scala.js, \sculpter corre en cualquier
-navegador moderno, sin instalaci\'on adicional, lo que lo hace
-distribuible y accesible para quien quiera probar un programa antes
-de ensamblarlo f\'isicamente.
+\sculpt como acto performativo, pero no es confiable. Los errores son
+inevitables y el lenguaje a nivel fisico no es tolerante a fallos de
+interpretaci\'on. Este compromiso motiva la existencia de un
+int\'erprete software complementario.
 
-\subsection{Protocolo de validaci\'on}
-\label{sec:methodology:validation}
+\subsection{El \emph{runtime} \sculpter}
+\label{sec:methodology:runtime}
 
-La validaci\'on se realiz\'o en seis sesiones con
-participantes repartidos en perfiles diversos: novatos sin
-experiencia previa en programaci\'on, programadores expertos con
-a\~nos de experiencia, estudiantes de secundaria, ni\~nos y
-profesionales del campo art\'istico. La diversidad de perfiles fue
-intencional. \sculpt aspira a ser inclusivo, y la validaci\'on debe
-ponerlo a prueba con pre\'ambulos cognitivos y motivacionales muy
-distintos.
+Para compensar la fragilidad de la interpretaci\'on humana, el
+ecosistema incluye \sculpter (\emph{Simple Cubic Language for Programming
+Task's Environment and Runtime}), un int\'erprete de referencia escrito
+en Scala~3 y compilado a JavaScript mediante Scala.js. \sculpter opera
+sobre la notaci\'on textual del lenguaje, equivalente a la notaci\'on
+f\'isica. Expone un editor donde se escribe el programa, controles separados para lexar,
+parsear y ejecutar, y un visor de estado paso a paso que muestra el
+contenido de cada pila en cada momento de la ejecuci\'on. 
+Esta vista por pasos lo hace tambi\'en \'util como herramienta de depuraci\'on antes
+del ensamblaje f\'isico. Por correr en el navegador no requiere
+instalaci\'on, lo que lo hace distribuible inmediatamente. 
+Adicionalmente, el sitio cuenta con documentaci\'on sobre el lenguaje, su uso y
+desarrollo, y una galería de obras art\'isticas hechas con \sculpt.
+El c\'odigo fuente del lenguaje y del int\'erprete est\'an disponibles bajo licencia
+abierta~\cite{sculpt-repo,sculpter-repo}.
 
-Cada sesi\'on sigui\'o cuatro fases. (1) Una \emph{introducci\'on}
-de 30 a 45~minutos, adaptada al perfil del grupo: m\'as detallada
-sobre los componentes f\'isicos para los novatos y m\'as t\'ecnica
-para los expertos. (2) Una fase de \emph{exploraci\'on libre} de
-una hora, sin tareas asignadas, en la que los participantes
-manipulan las piezas a su ritmo para familiarizarse con sus formas
-y conexiones. (3) Una fase de \emph{tareas computacionales} de
-dos horas, con conjuntos de problemas calibrados al nivel de cada
-grupo (\eg sumas iteradas, condicionales para romper bucles); los
-facilitadores resolv\'ian dudas pero el participante completaba la
-tarea por su cuenta. (4) Una \emph{encuesta y entrevista} final opcional
-sobre usabilidad, accesibilidad y experiencia general; en el caso
-de menores de edad, la encuesta tambi\'en la respondieron los
-docentes acompa\~nantes, con preguntas adicionales sobre la
-viabilidad de \sculpt como herramienta pedag\'ogica.
+\subsection{Especificaci\'on del lenguaje}
+\label{sec:methodology:language}
 
-El an\'alisis combin\'o m\'etodos cualitativos y cuantitativos.
-En lo cuantitativo se midi\'o el tiempo a tarea y el n\'umero de
-errores cometidos durante la fase de programaci\'on. En lo
-cualitativo se analizaron las entrevistas y las preguntas abiertas
-de la encuesta, buscando patrones recurrentes en la percepci\'on
-de las piezas, en los obst\'aculos sint\'acticos y en la
-experiencia est\'etica de manipular el lenguaje. Adicionalmente,
-con el subgrupo de artistas se realizaron sesiones extra
-dedicadas exclusivamente a la creaci\'on de piezas no funcionales,
-con el fin de evaluar a \sculpt como medio expresivo independiente
-de su capacidad computacional.
+\sculpt como lenguaje de programaci\'on se inspir\'o en lenguajes de ensamblador,
+con un conjunto de instrucciones m\'inimo y una sem\'antica de bajo nivel que opera sobre pilas de n\'umeros racionales. 
+Su \'unico tipo de dato son los n\'umeros racionales. Las pilas se crean en la primera referencia, no tienen
+cota superior de tama\~no. \sculpt no tiene variables ni funciones, pero se pueden simular con pilas y bucles.
+Su ejecuci\'on es secuencial, no concurrente y completamente dependiente de un interprete humano o \sculpter.
+La Tabla \ref{tab:instructions} resume la sem\'antica de las instrucciones operativas.
+
+\begin{table}[h]
+\centering
+\caption{Instrucciones operativas de \sculpt. $S$ designa una pila;
+$n$ un n\'umero literal.}
+\label{tab:instructions}
+\begin{tabular}{@{}lp{0.74\linewidth}@{}}
+\toprule
+Instrucci\'on & Sem\'antica \\
+\midrule
+\texttt{push $n$ $S$}    & Apila $n$ en $S$. \\
+\texttt{pop $S$}         & Retira el tope de $S$. Es \emph{no-op} si $S$ est\'a vac\'ia. \\
+\texttt{mov $S_1$ $S_2$} & Saca el tope de $S_2$ y lo apila en $S_1$. Si $S_2$ est\'a vac\'ia, apila~\texttt{nil} en $S_1$. \\
+\texttt{dup $S$}         & Duplica el tope de $S$. Si $S$ est\'a vac\'ia, apila~\texttt{nil}. \\
+\texttt{cmp $S$}         & Saca los dos topes $a,b$ y apila~$0$ si $a=b$, $-1$ si $a<b$, $1$ si $a>b$. Si alg\'un operando es \texttt{nil} o la pila tiene menos de dos elementos, apila~\texttt{nil}. \\
+\texttt{cmp $S$ $n$}     & Reemplaza el tope $a$ por $0$, $-1$ o $1$ comparando con $n$. Si $a$ es \texttt{nil} o $S$ est\'a vac\'ia, apila~\texttt{nil}. \\
+\texttt{?\ $S$}          & Saca el tope; si es $\geq 0$ ejecuta la siguiente instrucci\'on, si es $<0$ la salta. \\
+\texttt{jmp $k$}         & Desplaza el contador de programa en $k$ posiciones (puede ser negativo). \\
+\texttt{neg $S$}         & Niega el tope de $S$ \emph{in situ}. \\
+\texttt{mul $S$}         & Saca los dos topes y apila su producto. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\sculpt soporta seis operaciones aritm\'eticas, suma, resta,
+multiplicaci\'on, divisi\'on, m\'odulo y comparaci\'on, en dos
+variantes f\'isicamente distintas: \emph{unaria} (opera sobre los dos
+primeros elementos desde el tope de una pila) y \emph{binaria} (opera sobre el tope y un literal).
+Para operaciones no conmutativas, el primer operando es el lado
+izquierdo y el segundo el derecho; \texttt{sub stack 3} calcula
+\emph{tope\_de\_pila}~$-$~3. En aritm\'etica indefinida (\eg
+divisi\'on por cero) se apila un valor \textit{nil}; encontrarlo en una
+operaci\'on distinta de la comparaci\'on detiene el programa en estado
+de error. El control de flujo se construye con bucles f\'isicos
+(conexiones c\'iclicas de piezas), saltos relativos y un \emph{bloque
+pregunta} que ramifica seg\'un el signo del tope de una pila.
+
+\subsection{Turing-completitud}
+\label{sec:methodology:turing}
+
+\sculpt es Turing-completo. La demostraci\'on procede por construcci\'on
+de una traducci\'on $\Phi$ que mapea una m\'aquina de Turing arbitraria
+$M = (Q, \Gamma, b, \Sigma, \delta, q_0, F)$ a un programa de \sculpt
+$\Phi(M)$ que la simula paso a paso. La cinta se codifica con dos
+pilas, \texttt{left} y \texttt{right}: el tope de \texttt{right}
+representa la celda bajo el cabezal y el tope de \texttt{left} la
+celda inmediatamente a su izquierda. Los s\'imbolos no blancos se codifican como
+enteros positivos, y el blanco se identifica con el valor especial
+\texttt{nil}, esto es, $b \mapsto \texttt{nil}$. Una pila auxiliar \texttt{aux}
+soporta la comparaci\'on no destructiva durante las transiciones.
+
+Cada estado no terminal $q \in Q$ se traduce a un bloque $B(q)$ de
+tama\~no constante $|B(q)| = 2 + 12|\Gamma|$ instrucciones, dividido
+en tres fases. \emph{Fase~1}: lee la celda actual y copia su valor a
+\texttt{aux} ($2$ instrucciones); \emph{Fase~2}: es una cadena de
+despacho que prueba el valor contra cada s\'imbolo $\sigma_i \in
+\Gamma$ usando \texttt{cmp}, \texttt{mul }, \texttt{neg} y \texttt{?}
+($7|\Gamma|$ instrucciones); \emph{Fase~3}: ejecuta el manejador
+correspondiente a la transici\'on $\delta(q, \sigma_i) = (q', \sigma'_i, D)$,
+que escribe el nuevo s\'imbolo y mueve el cabezal ($5|\Gamma|$
+instrucciones). Los estados de aceptaci\'on se traducen al bloque
+\texttt{HALT}, que termina la ejecuci\'on.
+
+Un lema clave de la construcci\'on muestra que \emph{no se requiere
+c\'odigo expl\'icito para extender la cinta hacia el infinito en blanco}.
+El argumento descansa en dos hechos: (\textit{i})~las operaciones
+\texttt{dup}, \texttt{mov} y \texttt{cmp} sobre pilas vac\'ias o con
+operandos faltantes producen \texttt{nil}; (\textit{ii})~la
+codificaci\'on identifica el s\'imbolo blanco con ese mismo valor, \ie
+$\mathrm{enc}(b) = \texttt{nil}$. Como el operador \texttt{?} trata
+\texttt{nil} como rama ``falsa'' y \texttt{nil} se propaga a trav\'es de
+\texttt{cmp}, \texttt{mul} y \texttt{neg}, las pilas vac\'ias representan
+de forma natural una cola infinita de celdas en blanco sin necesidad de
+materializarlas. As\'i, cada $B(q)$ tiene tama\~no fijo independientemente
+de la frontera de la cinta.
+
+Sea $\Pi_k$ la configuraci\'on de \sculpt despu\'es de ejecutar $k$
+pasos. Decimos que $\Pi_k$ es \emph{$k$-consistente con $M$} si
+\texttt{aux} est\'a vac\'ia, el tope de \texttt{right} codifica la
+celda actual, los dem\'as elementos codifican el resto de la cinta a
+ambos lados del cabezal y el contador de programa apunta al inicio de
+$B(q_k)$. Por inducci\'on sobre $k$ se prueba que la $k$-consistencia
+se preserva, lo que da los dos teoremas siguientes:
+
+\begin{thm}[Preservaci\'on del halting]
+\label{thm:halting}
+Dada una m\'aquina de Turing $M$ termina sobre la entrada $w$ en $n$ pasos, entonces $\Phi(M)$
+alcanza el bloque \texttt{HALT} y termina.
+\end{thm}
+
+\begin{thm}[Preservaci\'on de la no-terminaci\'on]
+\label{thm:nonhalt}
+Dada una m\'aquina de Turing $M$ que no termina sobre la entrada $w$, entonces $\Phi(M)$ no alcanza el bloque \texttt{HALT} y no termina.
+\end{thm}
+
+La traducci\'on $\Phi$ es total, computable y produce programas de
+tama\~no $|\Phi(M)| = O(|Q| \cdot |\Gamma|)$. Como toda funci\'on
+computable se calcula con alguna m\'aquina de Turing, se sigue:
+
+\begin{thm}
+\sculpt es Turing-completo.\qed
+\end{thm}
+
+Como verificaci\'on emp\'irica de la traducci\'on se implement\'o el juego de
+\emph{Busy Beaver} de tres estados (\(BB_3\)) en \sculpt, que escribe
+seis~1's en la cinta antes de detenerse al cabo de 14 pasos. El
+desarrollo completo de la prueba, las definiciones precisas de los
+\emph{offsets} de salto y el c\'odigo del $BB_3$ se encuentran en el
+documento de tesis original.
+
+\subsection{\sculpt en acci\'on}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figures/fibo3d}
+\caption{Programa Fibonacci en \sculpt: las piezas distintas designan operaciones y las flechas el orden de ejecuci\'on. El programa
+llena la pila ``c\'irculo'' con la secuencia de Fibonacci.}
+\label{fig:fibonacci}
+\end{figure}
+
+La Figura~\ref{fig:fibonacci} muestra un programa que calcula la secuencia
+de Fibonacci. La misma estructura se expresa en la notaci\'on textual
+del int\'erprete \sculpter, que omite las flechas de conexi\'on y se
+lee como un lenguaje ensamblador.
+
+El programa coordina cuatro pilas con roles diferenciados.
+\textbf{circle} acumula la salida, \textbf{star} y \textbf{triangle}
+funcionan como registros de los dos t\'erminos previos $F_{n-2}$ y
+$F_{n-1}$; \textbf{hexagon} es una pila aritm\'etica temporal donde
+se calcula el nuevo t\'ermino. La inicializaci\'on (\texttt{push 0
+star}, \texttt{push 0 circle}, \texttt{push 1 circle}, \texttt{push 1
+triangle}) instala el invariante de arranque, con $F_0$ en \textbf{star},
+$F_1$ en \textbf{triangle} y la secuencia ya iniciada en \textbf{circle}.
+A partir de ah\'i, cada vuelta del bucle (\texttt{dup}~$\to$~\texttt{mov}~$\to$~\texttt{add}~$\to$~\texttt{mov})
+duplica los dos t\'erminos previos, los traslada a \textbf{hexagon},
+suma all\'i, copia el resultado a \textbf{circle} y rota los registros
+para la siguiente iteraci\'on. La instrucci\'on \texttt{jmp -10} cierra
+el bucle.
+
+La Tabla~\ref{tab:fibo-trace} traza la ejecuci\'on instrucci\'on por
+instrucci\'on. Cada fila muestra el estado de las cuatro pilas
+\emph{despu\'es} de ejecutar la instrucci\'on, con el tope a la
+derecha. Las primeras cuatro filas corresponden a la inicializaci\'on,
+las once siguientes a la primera vuelta del bucle, que produce
+$F_2 = 1$; la \'ultima fila resume el estado tras la segunda vuelta,
+que a\~nade $F_3 = 2$ a \textbf{circle}.
+
+\begin{table}[h]
+\centering
+\caption{Traza de ejecuci\'on del programa Fibonacci. Notaci\'on de
+pila: \texttt{[\,]} pila vac\'ia; en \texttt{[a, b, c]} el tope es
+\texttt{c}. Cada fila muestra el estado tras ejecutar la instrucci\'on.}
+\label{tab:fibo-trace}
+\footnotesize
+\begin{tabular}{@{}rlllll@{}}
+\toprule
+\# & Instrucci\'on & \textbf{star} & \textbf{triangle} & \textbf{hexagon} & \textbf{circle} \\
+\midrule
+ 1 & \texttt{push 0 star}        & \texttt{[0]}    & \texttt{[\,]}    & \texttt{[\,]}    & \texttt{[\,]}        \\
+ 2 & \texttt{push 0 circle}      & \texttt{[0]}    & \texttt{[\,]}    & \texttt{[\,]}    & \texttt{[0]}         \\
+ 3 & \texttt{push 1 circle}      & \texttt{[0]}    & \texttt{[\,]}    & \texttt{[\,]}    & \texttt{[0, 1]}      \\
+ 4 & \texttt{push 1 triangle}    & \texttt{[0]}    & \texttt{[1]}     & \texttt{[\,]}    & \texttt{[0, 1]}      \\
+\midrule
+ 5 & \texttt{dup triangle}       & \texttt{[0]}    & \texttt{[1, 1]}  & \texttt{[\,]}    & \texttt{[0, 1]}      \\
+ 6 & \texttt{dup star}           & \texttt{[0, 0]} & \texttt{[1, 1]}  & \texttt{[\,]}    & \texttt{[0, 1]}      \\
+ 7 & \texttt{mov hexagon star} & \texttt{[0]}    & \texttt{[1, 1]}  & \texttt{[0]}     & \texttt{[0, 1]}      \\
+ 8 & \texttt{mov hexagon triangle} & \texttt{[0]} & \texttt{[1]}    & \texttt{[0, 1]}  & \texttt{[0, 1]}      \\
+ 9 & \texttt{add hexagon}      & \texttt{[0]}    & \texttt{[1]}     & \texttt{[1]}     & \texttt{[0, 1]}      \\
+10 & \texttt{pop star}           & \texttt{[\,]}   & \texttt{[1]}     & \texttt{[1]}     & \texttt{[0, 1]}      \\
+11 & \texttt{mov star triangle}  & \texttt{[1]}    & \texttt{[\,]}    & \texttt{[1]}     & \texttt{[0, 1]}      \\
+12 & \texttt{dup hexagon}      & \texttt{[1]}    & \texttt{[\,]}    & \texttt{[1, 1]}  & \texttt{[0, 1]}      \\
+13 & \texttt{mov circle hexagon} & \texttt{[1]}  & \texttt{[\,]}    & \texttt{[1]}     & \texttt{[0, 1, 1]}   \\
+14 & \texttt{mov triangle hexagon} & \texttt{[1]} & \texttt{[1]}    & \texttt{[\,]}    & \texttt{[0, 1, 1]}   \\
+15 & \texttt{jmp -10}            & \texttt{[1]}    & \texttt{[1]}     & \texttt{[\,]}    & \texttt{[0, 1, 1]}   \\
+\midrule
+\multicolumn{2}{l}{\emph{(segunda vuelta, resumida)}} & \texttt{[1]} & \texttt{[2]} & \texttt{[\,]} & \texttt{[0, 1, 1, 2]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+La traza vuelve visible la sem\'antica LIFO del lenguaje. Cada
+\texttt{mov} y cada operaci\'on aritm\'etica act\'uan exclusivamente
+sobre el tope de la pila implicada, y todo movimiento de datos pasa
+por esa frontera. Cada fila es, adem\'as, lo que un int\'erprete
+humano sostiene en sus manos tras manipular f\'isicamente la pieza
+correspondiente; \sculpter reproduce exactamente esta vista paso a
+paso en el navegador, lo que permite depurar el programa antes del
+ensamblaje. La notaci\'on textual, sin embargo, no representa los
+bucles f\'isicos directamente y obliga a expresarlos como saltos
+relativos: el \texttt{jmp -10} de la fila~15 cierra el bucle que en
+la Figura~\ref{fig:fibonacci} aparece materializado como una conexi\'on
+c\'iclica entre piezas.
 
 \endinput
