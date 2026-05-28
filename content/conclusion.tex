@@ -2,26 +2,26 @@
 \chapter{Conclusion and Future Work}
 \label{cha:conclusion}
 \section{Conclusion}
-\sculpt is a visual and physical oriented programming language that aims to lower the entry threshold to programming by leveraging artistic creativity as an alternative to the traditional typewriter interface.
-We have presented the design and implementation of \sculpt, a language that allows users to create physical sculptures that compile to valid programs as well as a functional environment and runtime to run and test programs before assembling the final sculpture.
-The design choices in \sculpt make it possible for anyone to create programs without the need for prior programming knowledge, making it accessible and modifiable to a wide range of users.
+This document presented \sculpt, a tangible programming language whose pieces are 3D-printed and physically assembled to build Turing-complete sculptures.
+Over a minimal set of 13~instructions operating on LIFO stacks, the language's completeness was formally proven via a translation~$\Phi$ that maps arbitrary Turing machines to \sculpt programs.
+The aesthetic freedom of the pieces distinguishes the language from the three families of related work and, at the same time, broadens its possibilities for accessibility and expressive use.
 
-Validation indicates that \sculpt as an overall concept is well received by users, with many finding it intuitive and easy to use.
-The use of physical blocks to represent code constructs allows users to focus on the creative aspects of programming, rather than the technical details of syntax and semantics.
-Results show that \sculpt shines in its ability to allow non-programmers to engage in code.
-Although the language is still in its early stages, it has the potential to be a valuable tool for artists, educators, and anyone interested in exploring the intersection of art and programming.
-\sculpt is not intended to replace traditional programming languages, it is naturally unwieldy for serious projects, but functions to complement them by providing a new way of thinking about and creating programs.
-
-
-
+The validation with diverse audiences showed a consistent pattern.
+Physicality works as an entry point and the components are recognisable across audiences, but programming still requires algorithmic reasoning and that does not disappear by changing the medium.
+The educator perception, more positive than that of the learners, suggests that the pedagogical potential of \sculpt is greater than its short-term results allow us to measure.
+Artists, for their part, found in the language an expressive medium in its own right, beyond its computational capacity without leaving it aside.
+A fuller critical reading of these results, their tensions and their limits is developed in Chapter~\ref{cha:discussion}.
 
 \section{Future Work}
-\sculpt is still in its early stages and there are several areas for future work.
-First, we plan to conduct more extensive user studies to gather more data on the usability and accessibility of \sculpt, as well as the overall experience of using the language.
-Second, we plan to explore the use of \sculpt in different contexts and environments, such as in schools or workshops, to evaluate its effectiveness as a potential teaching tool.
-Third, we intend to enhance \sculpter to support more complex features, such as better error handling, a language server, syntax highlighting, and code completion.
-Also enhance \sculpter with interesting features aimed at artists, such as a visualizer to see the program as a sculpture before assembling it, exporting the sculpture's blocks as 3D models for 3D printing and assembling and sculpture scanner to parse a sculpture and generate the corresponding program using images.
-Finally, we plan to explore the use of \sculpt in different artistic contexts, such as in interactive installations or performances, to evaluate its potential as an artistic tool.
+Several lines of research remain open regarding the language and its artistic and educational capabilities.
+First, more extensive studies in school contexts and workshops, with stable cohorts that allow measuring longitudinal learning rather than only single-session performance.
+Second, improvements to \sculpter as a development tool and reference guide: a more informative error-handling system, supporting tooling such as a language server with syntax highlighting and command completion, and a visualiser that previews the final assembly before printing the pieces.
+Third, tools aimed specifically at artists: exporting a sculpture's blocks as 3D models ready for printing, and a \emph{sculpture scanner} able to read a physical construction and reconstruct the corresponding program via computer vision.
+Fourth, the exploration of \sculpt in expanded artistic contexts such as interactive installations, performances and multidisciplinary workshops.
+
+This last line, the language as an object of \emph{programming experience}, where what matters is not only what is computed but what it feels like to do so, is the most promising.
+The physicality and geometric abstraction of \sculpt's statements are, more than a quirk, an invitation to rethink what it means to create with code, who can do it and why they would.
+Code as art, art as code.
 
 \endinput
 

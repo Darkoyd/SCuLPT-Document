@@ -398,13 +398,57 @@ Another section of the survey was dedicated to evaluate, from a more technical e
 Alongside the survey, users were given a set of programming tasks to complete using \sculpt.
 The tasks were designed to test the users' understanding of the language and its capabilities, as well as their ability to write programs in \sculpt.
 Throughout the sessions, about 50\% of the total participants were able to complete the tasks.
-Further, per-session analysis shows interesting insights into the users' understanding of the language.
-The first session was conducted with a group of novice teenage users, who had no prior programming experience.
-These users were able to understand the basic concepts of \sculpt yet they were not able to complete the tasks.
-The second session was conducted with a group of undergraduate students and expert programmers, who had years of experience in the field.
-Surprisingly, these users were also not able to complete the tasks, but they were able to understand the language and its capabilities.
-The next sessions were conducted with groups ranging from children to teenagers. Children evidently struggled with programming, yet outshines in the physical manipulation of the blocks.
-Teenagers, on the other hand, were able to understand the language and its capabilities, and they were able to complete the tasks in an average time of 1 hour and a half.
+Per sub-population, however, the picture is not the one one might expect.
+Table~\ref{tab:validation} summarises the findings by group.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Findings on the computational tasks by sub-population.}
+\label{tab:validation}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Sub-population & Completion & Qualitative observation \\
+\midrule
+Children                  & Low      & Excellent physical handling; conceptual difficulty. \\
+Novice teenagers          & Medium   & Completed in $\sim$1.5\,h on average. \\
+Novice adults             & Low      & Understood the language without completing tasks. \\
+Expert programmers        & Low      & Difficulty similar to novices. \\
+Artists                   & None     & Understand the pieces, do not complete tasks. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The most unexpected result was the difficulty experienced by expert programmers: despite their prior experience, they did not outperform novice teenagers in task completion.
+A plausible reading is that the mental model afforded by experience with textual languages does not transfer directly to reasoning over LIFO stacks assembled physically.
+Teenagers, without those prior models, approached the language on its own terms.
+
+\subsubsection*{Survey data}
+The quantitative survey (Likert scale 1--5) was administered to a sub-set of $n=25$ voluntary participants for whom complete responses were obtained.
+The questions were grouped into five blocks: (1) demographic information and prior experience, (2) quantitative aspects of the language (\eg difficulty, clarity), (3) qualitative aspects of the language (\eg enjoyment, creativity, perceived usefulness), (4) comparative evaluation of programming knowledge, and (5) educators' perception of \sculpt's pedagogical potential.
+Table~\ref{tab:survey-likert} summarises the means ranges per question block.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Aggregates of the quantitative survey ($n=25$, scale 1--5).}
+\label{tab:survey-likert}
+\begin{tabular}{@{}lc@{}}
+\toprule
+Question block & Mean (range) \\
+\midrule
+Quantitative aspects of the language              & 2.2 -- 3.4 \\
+Comparative evaluation against textual languages  & 2.8 -- 3.5 \\
+Educator/evaluator perception                     & 4.0 -- 4.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The difference between blocks is informative.
+Participants' technical perception is medium-low, consistent with the reported difficulty completing the tasks.
+The perception of the teachers who accompanied the sessions is clearly positive, which suggests pedagogical viability even when learners' immediate performance is modest.
+Qualitative responses reinforce both sides: participants highlight that ``bringing programming into the 3D world is a feat'' and that the language is ``interesting and creative for young children'', but they also report that ``the blocks sometimes generate confusion'' and that ``the operation concepts are confusing''.
+The most frequent suggestions point to supporting didactic material (slides, incremental exercises) and to integration with concrete domains such as video games or mathematics.
 
 Results show that \sculpt as a programming language can be easy to understand and use, yet it is not easy to write programs in \sculpt.
 The language is capable of writing any program, but it requires a certain level of understanding of the language and its capabilities.

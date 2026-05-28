@@ -1,0 +1,93 @@
+% !TEX root = ../main.tex
+
+\chapter{Related Work}
+\label{cha:related}
+
+\sculpt is inserted into a conversation that has been going on for several decades about how to open programming to non-specialist audiences.
+That conversation has produced three families of languages worth reviewing separately, since each one partially resolves the problem \sculpt poses.
+We name these families \emph{visual and block-based languages}, \emph{tangible languages for computing education}, and \emph{computing as artistic practice} (\emph{creative computing}).
+We close the chapter by positioning \sculpt with respect to the three.
+
+\section{Visual and Block-based Languages}
+\label{sec:related:visual}
+
+The line of block-based languages begins with \emph{LogoBlocks}~\cite{begel96} in 1996 and consolidates with \emph{Scratch}~\cite{resnick09}, developed at the MIT Media Lab's \emph{Lifelong Kindergarten Group}.
+Scratch replaces textual syntax with draggable blocks whose shape defines what fits with what.
+This opens an interesting exploration of syntax: in this kind of language, syntax takes on a geometric dimension.
+The sets of rules that govern program construction become physical rules.
+That idea has been extended by \emph{Blockly}~\cite{fraser15}, a Google library that generates code in target languages (JavaScript, Python, Dart) from block programs, and by \emph{Snap!}~\cite{harvey13}, a reimplementation of Scratch with first-class functions and customisable blocks, aimed at university education.
+
+These proposals drastically reduce syntactic friction for beginners and are now the tool of choice for early computing education.
+Their limitations, however, are consistent with the diagnosis from the previous chapter.
+The blocks live on a screen, depend on a keyboard (usually) and a mouse, and, by design, do not admit meaningful aesthetic freedom beyond changing background colours.
+The interface has been simplified and computation improved, but its material support has not changed.
+
+\section{Tangible Languages for Education}
+\label{sec:related:tangible}
+
+A second family moves programming into the physical world.
+\emph{AlgoBlock}~\cite{suzuki95} was one of the first systems to propose physical, connectable blocks as a medium for building programs, mainly for collaborative purposes among children.
+\emph{Tern}~\cite{horn07} extended the idea with wooden pieces recognised by computer vision, with no need for embedded electronics.
+More recently, \emph{KIBO}~\cite{sullivan15} combines wooden blocks with barcodes read by a mobile robot, and \emph{Cubetto}~\cite{cubetto}, commercialised in multiple markets, uses a grid and magnetic tiles to program the movement of a small robot.
+\emph{Osmo Coding}~\cite{osmo} follows a hybrid line: the pieces are physical but execution happens on a tablet that observes them through the camera.
+
+These systems amply demonstrate that tangibility reduces cognitive and motivational barriers for student audiences, in line with prior literature on \emph{tangible user interfaces}~\cite{ishii97,marshall07}.
+They share, however, three recurring limitations.
+First, they are all designed as \emph{educational tools}: their expressive power is intentionally bounded and applied to a specific domain, usually robotics.
+This provides a more concrete, manipulative and stimulating programming experience for students, but the resulting systems are still domain-specific languages, or rather, programmable didactic tools.
+Second, the pieces are closed.
+They come in a shape, colour and size preset by the manufacturer, and the user usually cannot modify them without destroying or altering their functionality.
+That freedom, both aesthetic and functional, is absent by design.
+The drive to control the user experience is understandable in an educational context, but it limits expressiveness and the range of users who can use these systems.
+The freedom to modify pieces matters for users with accessibility needs, who may require pieces of a particular size, material or morphology to manipulate them.
+Third, most of these systems come with a price tag that not every educational institution or individual can afford.
+In addition to needing specialised hardware (and sometimes software), the cost of the pieces, their maintenance and access can be a barrier to adoption.
+This is especially relevant in low-resource contexts, where access to educational tools is crucial to close learning gaps.
+
+\section{Computing as Artistic Practice}
+\label{sec:related:art}
+
+A third tradition approaches the problem from a different angle.
+It keeps the textual interface of programming but aims it explicitly at artistic production.
+\emph{Processing}~\cite{reas07} offers a Java dialect intended for visual artists and designers, and popularised the idea that writing code is a legitimate form of artistic practice.
+\emph{Sonic Pi}~\cite{aaron16} builds on the SuperCollider synthesis engine a Ruby superset aimed at musical \emph{live coding}, originally conceived as an educational tool for schools in England.
+The practice of \emph{live coding}, both musical and visual, has been systematised as an artistic-computational movement in its own right~\cite{collins03}, with dedicated festivals and communities (\eg \emph{Algorave}).
+
+These initiatives have shown that programming \emph{can} be art and that there is a trained and enthusiastic audience for that vision.
+They share, however, a structural limitation with the first family: they do not abandon the typewriter paradigm.
+The \emph{live coding} artist still types on a screen in front of an audience (and gets stressed when the code does not compile); the final artistic output is sound, video or image, not the physical body of the program.
+
+\section{Positioning of SCuLPT}
+\label{sec:related:positioning}
+
+\sculpt sits at the seldom-travelled intersection of the three preceding families.
+It shares with block-based languages the idea that syntax can be a geometric property of the pieces, essential to building programs.
+The natural intuitiveness of fitting pieces together is a powerful resource for assimilating complex syntactic concepts and grounds them in a concrete, understandable construction logic: pieces either fit or they do not.
+It shares with tangible languages the bet on moving programming off the screen and into three-dimensional space.
+Enabling the world to program necessarily implies opening programming to forms of access other than the traditional one.
+The aim is to leverage the manipulative and open nature of the pieces to open programming to users with diverse capabilities, resources and accessibility needs.
+Finally, it shares with the \emph{creative computing} tradition the conviction that artistic practice is a legitimate vehicle for computation, not a later ornament.
+Table~\ref{tab:related} summarises the differences.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Comparison of \sculpt with related families.}
+\label{tab:related}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+                          & Block/visual & Tangible edu. & Creative comp. & \sculpt \\
+\midrule
+Physical support          & No  & Yes & No  & Yes \\
+Turing-complete           & Partial & No & Yes & Yes \\
+Aesthetic freedom         & Low & Low & Medium & Very high \\
+Target audience           & Students/Novices & Children & Artists & Mixed \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+To the best of our knowledge, \sculpt is the first language to combine \emph{physical tangibility}, \emph{formally proven Turing-completeness} and \emph{radical aesthetic freedom} in a single design.
+The radicalness of the aesthetic openness deserves to be underlined: in \sculpt the user can freely modify the shape, size, colour, material and texture of the pieces; the only constrained property is the topology of the connections.
+A piece may be a standard PLA cube or an animal figure carved in wood, and the program will work the same as long as the connection points respect the specification.
+
+\endinput
